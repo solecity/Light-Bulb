@@ -27,6 +27,11 @@
             <i class="fa fa-award fa-lg" aria-hidden="true"></i>
           </router-link>
         </b-nav-item>
+        <b-nav-item href="#">
+          <router-link :to="{}" :class="{ 'nav-link': true }">
+            Gestor
+          </router-link>
+        </b-nav-item>
 
         <b-nav-item-dropdown id="profileNavbar" right>
           <template slot="button-content">

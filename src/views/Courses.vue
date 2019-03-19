@@ -9,6 +9,7 @@
         </b-col>
         <b-col sm="8">
           <Courses/>
+          <p>il</p>git 
         </b-col>
         <b-col sm="3">
           <Rightbar/>

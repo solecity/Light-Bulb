@@ -2,33 +2,23 @@
   <b-container fluid>
     <div class="middle catalog">
       <b-row class="subrow">
-        <h2>Unidades Pedagógicas</h2>
+        <h2>Gestor</h2>
       </b-row>
 
-      <!-- COURSES -->
-      <b-row class="subrow courseList">
-        <b-col md="12" class="course">
-          <b-row>
-            <b-col md="12" id="courseTitle" class="text-left">
-              <h5>fffffg</h5>
-            </b-col>
-          </b-row>
-
-          <b-row v-for="unit in course.courseUnit" :key="unit.id">
-            <b-col md="8" id="signInUnit" class="text-left">
-              <p>fffff</p>
-            </b-col>
-            <b-col md="2" id="signInBtn">
-              <b-button class="btn" type="button">Inscrever</b-button>
-            </b-col>
-            <b-col md="1" id="infoBtn">
-              <b-button class="btn" type="button">
-                <i class="fas fa-info-circle"></i>
-              </b-button>
-            </b-col>
-          </b-row>
-        </b-col>
-      </b-row>
+        <div>
+            <router-link :to="{ name: 'home' }" :class="{ 'nav-link': true }">
+                <b-button class="btn" type="button">Gestor de Utilizadores</b-button>
+            </router-link>
+            <router-link :to="{ name: '' }" :class="{ 'nav-link': true }">
+                <b-button class="btn" type="button">Gestor de Unidades Pedagógicas</b-button>
+            </router-link>
+            <router-link :to="{ name: '' }" :class="{ 'nav-link': true }">
+                <b-button class="btn" type="button">Gestor de Tags</b-button>
+            </router-link>
+            <router-link :to="{ name: '' }" :class="{ 'nav-link': true }">
+                <b-button class="btn" type="button">Button</b-button>
+            </router-link>
+        </div>
     </div>
   </b-container>
 </template>

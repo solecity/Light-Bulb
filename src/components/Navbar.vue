@@ -28,7 +28,7 @@
           </router-link>
         </b-nav-item>
         <b-nav-item href="#">
-          <router-link :to="{}" :class="{ 'nav-link': true }">
+          <router-link :to="{ name: 'gestor'}" :class="{ 'nav-link': true }">
             Gestor
           </router-link>
         </b-nav-item>

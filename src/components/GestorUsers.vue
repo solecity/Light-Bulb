@@ -2,22 +2,10 @@
   <b-container fluid>
     <div class="middle catalog">
       <b-row class="subrow">
-        <h2>Gestor</h2>
+        <h2>Gestor de Utilizadores</h2>
       </b-row>
-
         <div>
-            <router-link :to="{ name: 'gestorUsers' }" :class="{ 'nav-link': true }">
-                <b-button class="btn" type="button">Gestor de Utilizadores</b-button>
-            </router-link>
-            <router-link :to="{ name: '' }" :class="{ 'nav-link': true }">
-                <b-button class="btn" type="button">Gestor de Unidades Pedagógicas</b-button>
-            </router-link>
-            <router-link :to="{ name: '' }" :class="{ 'nav-link': true }">
-                <b-button class="btn" type="button">Gestor de Tags</b-button>
-            </router-link>
-            <router-link :to="{ name: '' }" :class="{ 'nav-link': true }">
-                <b-button class="btn" type="button">Button</b-button>
-            </router-link>
+            <b-table striped hover :items="items" :fields="fields" :bordered="bordered" :outlined="outlined"></b-table>
         </div>
     </div>
   </b-container>
@@ -31,7 +19,12 @@ export default {
   name: "gestor",
   data: function() {
     return {
-
+        items: [
+          { age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
+          { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
+          { age: 89, first_name: 'Geneva', last_name: 'Wilson' },
+          { age: 38, first_name: 'Jami', last_name: 'Carney' }
+        ]
     };
   },
   created() {

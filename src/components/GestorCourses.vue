@@ -62,7 +62,7 @@ export default {
   name: "gestor",
   data: function() {
     return {
-      data: {
+      form: {
           "email": "",
           "name": "",
           "food": null,
@@ -73,7 +73,9 @@ export default {
           { id: 21, username: 'Larsen', block: '<i class="fas fa-lock"></i>' },
           { id: 89, username: 'Geneva', block: '<i class="fas fa-lock"></i>' },
           { id: 38, username: 'Jami', block: '<i class="fas fa-lock"></i>' }
-        ]
+        ],
+        foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
+        show: true
     };
   },
   created() {
@@ -85,7 +87,23 @@ export default {
     );
   },
   methods: {
-    
+    onSubmit(evt) {
+      evt.preventDefault()
+      alert(JSON.stringify(this.form))
+    },
+      onReset(evt) {
+        evt.preventDefault()
+        // Reset our form values
+        this.form.email = ''
+        this.form.name = ''
+        this.form.food = null
+        this.form.checked = []
+        // Trick to reset/clear native browser form validation state
+        this.show = false
+        this.$nextTick(() => {
+        this.show = true
+      })
+    }
   },
   computed: {
     

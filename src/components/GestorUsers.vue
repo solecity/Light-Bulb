@@ -65,7 +65,6 @@ export default {
           email: this.tempUsers[i].email
         }
         items.push(temp);
-        console.log("ooo")
       }
       console.log(items)
       return items

@@ -9,7 +9,7 @@
             <router-link :to="{ name: 'gestorUsers' }" :class="{ 'nav-link': true }">
                 <b-button class="btn" type="button">Gestor de Utilizadores</b-button>
             </router-link>
-            <router-link :to="{ name: '' }" :class="{ 'nav-link': true }">
+            <router-link :to="{ name: 'gestorCourses' }" :class="{ 'nav-link': true }">
                 <b-button class="btn" type="button">Gestor de Unidades Pedagógicas</b-button>
             </router-link>
             <router-link :to="{ name: '' }" :class="{ 'nav-link': true }">

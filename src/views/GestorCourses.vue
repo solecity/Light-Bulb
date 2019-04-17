@@ -8,7 +8,8 @@
           <Leftbar/>
         </b-col>
         <b-col sm="8">
-          <GestorUsers/>
+          <GestorCourses/>
+          <p>il</p>
         </b-col>
         <b-col sm="3">
           <Rightbar/>
@@ -24,14 +25,14 @@
 import Navbar from "@/components/Navbar.vue";
 import Leftbar from "@/components/Leftbar.vue";
 import Rightbar from "@/components/Rightbar.vue";
-import GestorUsers from "@/components/GestorUsers.vue";
+import GestorCourses from "@/components/GestorCourses.vue";
 
 export default {
   components: {
     Navbar,
     Leftbar,
     Rightbar,
-    GestorUsers
+    GestorCourses
   }
 };
 </script>

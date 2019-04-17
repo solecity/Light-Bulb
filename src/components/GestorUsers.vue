@@ -1,16 +1,36 @@
 <template>
-  <b-container fluid>
-    <div class="middle catalog">
-      <b-row class="subrow">
-        <h2>Gestor de Utilizadores</h2>
-      </b-row>
-        <div>
-            <b-table striped hover :items="items" :fields="fields" :bordered="bordered" :outlined="outlined"></b-table>
-        </div>
-    </div>
-  </b-container>
-</template>
+  <div>
+    <b-table :items="setItems" :fields="fields" striped>
+      <template slot="show_details" slot-scope="row">
+        <b-button size="sm" @click="row.toggleDetails" class="mr-2">
+          Editar Utilizador
+        </b-button>
+      </template>
 
+      <template slot="remove_user" slot-scope="row">
+        <b-button size="sm" @click="row.removeUser" class="mr-2">
+          Remover Utilizador
+        </b-button>
+      </template>
+
+      <template slot="row-details" slot-scope="row">
+        <b-card>
+          <b-row class="mb-2">
+            <b-col sm="3" class="text-sm-right"><b>ID:</b></b-col>
+            <b-col>{{ row.item.id }}</b-col>
+          </b-row>
+
+          <b-row class="mb-2">
+            <b-col sm="3" class="text-sm-right"><b>Is Active:</b></b-col>
+            <b-col>{{ row.item.isActive }}</b-col>
+          </b-row>
+
+          <b-button size="sm" @click="row.toggleDetails">Hide Details</b-button>
+        </b-card>
+      </template>
+    </b-table>
+  </div>
+</template>
 
 <script>
 import { mapGetters } from "vuex";
@@ -19,16 +39,15 @@ export default {
   name: "gestor",
   data: function() {
     return {
+        fields: ['id', 'name', 'email', 'show_details', 'remove_user'],
         items: [
-          { age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-          { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-          { age: 89, first_name: 'Geneva', last_name: 'Wilson' },
-          { age: 38, first_name: 'Jami', last_name: 'Carney' }
+          
         ]
     };
   },
   created() {
     this.loggedUser = this.$store.state.loggedUser;
+    this.tempUsers = this.$store.state.users;
 
     /********/
     this.tempLoggedId = parseInt(
@@ -36,7 +55,21 @@ export default {
     );
   },
   methods: {
-    
+    setItems(){
+      console.log(this.tempUsers.length)
+      for (let i = 0; i < this.tempUsers.length; i++) {
+        let temp = {
+          isActive: true,
+          id: this.tempUsers[i].id,
+          name: this.tempUsers[i].name,
+          email: this.tempUsers[i].email
+        }
+        items.push(temp);
+        console.log("ooo")
+      }
+      console.log(items)
+      return items
+    }
   },
   computed: {
     

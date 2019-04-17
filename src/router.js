@@ -10,6 +10,7 @@ import Profile from "./views/Profile.vue";
 import Courses from "./views/Courses.vue";
 import Gestor from "./views/Gestor.vue";
 import GestorUsers from "./views/GestorUsers.vue";
+import GestorCourses from "./views/GestorCourses.vue";
 
 Vue.use(Router);
 
@@ -64,6 +65,11 @@ export default new Router({
       path: "/gestorUsers",
       name: "gestorUsers",
       component: GestorUsers
+    },
+    {
+      path: "/gestorCourses",
+      name: "gestorCourses",
+      component: GestorCourses
     }
   ]
 });

@@ -16,7 +16,7 @@
       </b-form-group>
 
       <b-form-group id="input-group-3" label="Unidades Pedagógicas:" label-for="input-3">
-        <b-form-select id="input-3" v-model="form.unit" :options="setUnits" required multiple="true"></b-form-select>
+        <b-form-select id="input-3" v-model="form.unit" :options="setUnits()" required multiple="true"></b-form-select>
       </b-form-group>
 
       <b-button type="submit" variant="primary">Adicionar</b-button>
@@ -63,6 +63,7 @@ export default {
   created() {
     this.loggedUser = this.$store.state.loggedUser;
     this.tempCourses = this.$store.state.courses;
+    this.tempCourseUnit = this.$store.state.courses.courseUnit;
 
     /********/
     this.tempLoggedId = parseInt(
@@ -77,10 +78,8 @@ export default {
     onReset(evt) {
       evt.preventDefault();
       // Reset our form values
-      this.form.email = "";
       this.form.name = "";
-      this.form.food = null;
-      this.form.checked = [];
+      this.form.unit = "";
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
@@ -90,13 +89,10 @@ export default {
 
     setUnits(){
       console.log(this.tempCourses)
-      console.log(this.tempCourses.length)
-      for (let i = 0; i < this.tempCourses.length; i++) {
-        let tempCourseUnit = this.tempCourses[i].courseUnit
-        for (let j = 0; j < tempCourseUnit.length; j++) {
-          let temp = tempCourseUnit[j].unit
-          
-        }
+     // console.log(this.tempCourses.length)
+      for (let i = 0; i < this.tempCourseUnit.length; i++) {
+          let temp = this.tempCourseUnit[i].unit
+  
         units.push(temp);
       }
       console.log(units)

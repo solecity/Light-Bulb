@@ -63,7 +63,11 @@ export default {
   created() {
     this.loggedUser = this.$store.state.loggedUser;
     this.tempCourses = this.$store.state.courses;
-    this.tempCourseUnit = this.$store.state.courses.courseUnit;
+    //this.tempCourseUnit;
+   /* for(let i=0; i<this.tempCourses.length; i++){
+      this.tempCourseUnit.push(this.tempCourses[i].courseUnit);
+    }*/
+    console.log(this.tempCourseUnit)
 
     /********/
     this.tempLoggedId = parseInt(
@@ -85,18 +89,22 @@ export default {
       this.$nextTick(() => {
         this.show = true;
       });
-    },
+    },setUnits
 
-    setUnits(){
-      console.log(this.tempCourses)
-     // console.log(this.tempCourses.length)
-      for (let i = 0; i < this.tempCourseUnit.length; i++) {
-          let temp = this.tempCourseUnit[i].unit
-  
-        units.push(temp);
+    (){
+      let tempCourseUnit = [];
+      for(let i=0; i<this.tempCourses.length; i++){
+        tempCourseUnit.push(this.tempCourses[i].courseUnit)
       }
-      console.log(units)
-      return units
+      console.log(tempCourseUnit)
+     // console.log(this.tempCourses.length)
+      for (let i = 0; i < tempCourseUnit.length; i++) {
+          let temp = tempCourseUnit[i].unit
+          console.log("oooo")
+       // units.push(temp);
+        return temp
+      }
+     // console.log(units)
     }
   },
   computed: {}

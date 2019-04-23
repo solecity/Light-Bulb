@@ -16,7 +16,7 @@
       </b-form-group>
 
       <b-form-group id="input-group-3" label="Unidades Pedagógicas:" label-for="input-3">
-        <b-form-select id="input-3" v-model="form.unit" :options="units" required multiple="true"></b-form-select>
+        <b-form-select id="input-3" v-model="form.unit" :options="setUnits" required multiple="true"></b-form-select>
       </b-form-group>
 
       <b-button type="submit" variant="primary">Submit</b-button>
@@ -46,8 +46,7 @@ export default {
     return {
       form: {
         name: "",
-        unit: "",
-        checked: []
+        unit: ""
       },
       items: [
         { id: 40, nome: "Dickerson", block: `<i class="fas fa-lock"></i>` },
@@ -56,6 +55,7 @@ export default {
         { id: 38, nome: "Jami", block: '<i class="fas fa-lock"></i>' }
       ],
       units: [
+        
       ],
       show: true
     };
@@ -89,6 +89,7 @@ export default {
     },
 
     setUnits(){
+      console.log(this.tempCourses)
       console.log(this.tempCourses.length)
       for (let i = 0; i < this.tempCourses.length; i++) {
         let tempCourseUnit = this.tempCourses[i].courseUnit

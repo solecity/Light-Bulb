@@ -9,7 +9,6 @@
         </b-col>
         <b-col sm="8">
           <GestorCourses/>
-          <p>il</p>
         </b-col>
         <b-col sm="3">
           <Rightbar/>

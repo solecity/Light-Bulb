@@ -208,7 +208,7 @@ export default new Vuex.Store({
       }
     ],
     notifications: [],
-    challenges: [
+    medals: [
       {
         id: 1,
         label: "Bem-vindo",
@@ -364,7 +364,7 @@ export default new Vuex.Store({
     },
     getCourses: state => state.courses,
     getTags: state => state.tags,
-    getChallenges: state => state.challenges,
+    getMedals: state => state.medals,
     getLevels: state => state.levels,
     checkLogin: state => login => {
       let error = "";
@@ -482,7 +482,7 @@ export default new Vuex.Store({
       return state.levels.find(level => level.id == id);
     },
     getMedalById: state => id => {
-      return state.challenges.find(challenge => challenge.id == id);
+      return state.medals.find(medal => medal.id == id);
     },
     checkUserUnitsById: state => newUnit => {
       let error = "";

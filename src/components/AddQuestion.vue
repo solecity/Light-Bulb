@@ -151,7 +151,7 @@ export default {
 
       if (this.questionValidation().valid) {
         this.addXP();
-        this.checkChallenges();
+        this.checkMedals();
         this.$store.dispatch("set_question", newQuestion);
         alert("Registo efetuado com sucesso");
       } else {
@@ -167,7 +167,7 @@ export default {
       this.$store.dispatch("edit_user_xp", xp);
     },
 
-    checkChallenges() {
+    checkMedals() {
       let temp = this.$store.getters.getQuestionsByUserId(this.tempLoggedId);
 
         console.log(temp.length);

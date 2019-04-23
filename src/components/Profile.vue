@@ -166,23 +166,23 @@ export default {
     showUserMedals() {
       let medals = this.activeUser.gameElements.medals;
       for (let i = 0; i < medals.length; i++) {
-        let tempMedal = {
+        let temp = {
           id: medals[i],
           label: this.getMedalById(medals[i]).label,
           type: this.getMedalById(medals[i]).type
         };
-        this.userMedals.push(tempMedal);
+        this.userMedals.push(temp);
       }
     },
 
     showUserQuestions() {
-      for (let i = 0; i < this.tempChallenges.length; i++) {
-        let tempMedal = {
-          id: this.tempChallenges[i],
-          label: this.getMedalById(this.tempChallenges[i]).label,
-          type: this.getMedalById(this.tempChallenges[i]).type
+      for (let i = 0; i < this.tempMedals.length; i++) {
+        let temp = {
+          id: this.tempMedals[i],
+          label: this.getMedalById(this.tempMedals[i]).label,
+          type: this.getMedalById(this.tempMedals[i]).type
         };
-        this.userMedals.push(tempMedal);
+        this.userMedals.push(temp);
       }
     }
   },

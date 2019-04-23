@@ -8,19 +8,15 @@
       >
         <b-form-input
           id="inputName"
-          v-model="form.email"
+          v-model="form.name"
           type="text"
           required
           placeholder="Nome do Curso"
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
-        <b-form-input id="input-2" v-model="form.name" required placeholder="Enter name"></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-3" label="Food:" label-for="input-3">
-        <b-form-select id="input-3" v-model="form.food" :options="foods" required></b-form-select>
+      <b-form-group id="input-group-3" label="Unidades Pedagógicas:" label-for="input-3">
+        <b-form-select id="input-3" v-model="form.unit" :options="units" required multiple="true"></b-form-select>
       </b-form-group>
 
       <b-button type="submit" variant="primary">Submit</b-button>
@@ -49,29 +45,24 @@ export default {
   data: function() {
     return {
       form: {
-        email: "",
         name: "",
-        food: null,
+        unit: "",
         checked: []
       },
       items: [
-        { id: 40, username: "Dickerson", block: `<i class="fas fa-lock"></i>` },
-        { id: 21, username: "Larsen", block: '<i class="fas fa-lock"></i>' },
-        { id: 89, username: "Geneva", block: '<i class="fas fa-lock"></i>' },
-        { id: 38, username: "Jami", block: '<i class="fas fa-lock"></i>' }
+        { id: 40, nome: "Dickerson", block: `<i class="fas fa-lock"></i>` },
+        { id: 21, nome: "Larsen", block: '<i class="fas fa-lock"></i>' },
+        { id: 89, nome: "Geneva", block: '<i class="fas fa-lock"></i>' },
+        { id: 38, nome: "Jami", block: '<i class="fas fa-lock"></i>' }
       ],
-      foods: [
-        { text: "Select One", value: null },
-        "Carrots",
-        "Beans",
-        "Tomatoes",
-        "Corn"
+      units: [
       ],
       show: true
     };
   },
   created() {
     this.loggedUser = this.$store.state.loggedUser;
+    this.tempCourses = this.$store.state.courses;
 
     /********/
     this.tempLoggedId = parseInt(
@@ -95,6 +86,20 @@ export default {
       this.$nextTick(() => {
         this.show = true;
       });
+    },
+
+    setUnits(){
+      console.log(this.tempCourses.length)
+      for (let i = 0; i < this.tempCourses.length; i++) {
+        let tempCourseUnit = this.tempCourses[i].courseUnit
+        for (let j = 0; j < tempCourseUnit.length; j++) {
+          let temp = tempCourseUnit[j].unit
+          
+        }
+        units.push(temp);
+      }
+      console.log(units)
+      return units
     }
   },
   computed: {}

@@ -2,13 +2,20 @@
   <div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group id="nameLabel" label="Nome:" label-for="inputName">
-        <b-form-input
-          id="inputName"
-          v-model="form.name"
-          type="text"
+        <b-form-input id="inputName" v-model="form.name" type="text" required placeholder="Nome"></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="input-group-3" label="Tipo:" label-for="input-3">
+        <b-form-select
+          id="input-3"
+          v-model="form.type"
+          :options="setType()"
           required
-          placeholder="Nome"
-        ></b-form-input>
+        ></b-form-select>
+      </b-form-group>
+
+      <b-form-group id="emailLabel" label="E-mail:" label-for="inputEmail">
+        <b-form-input id="inputEmail" v-model="form.email" type="text" required placeholder="E-mail"></b-form-input>
       </b-form-group>
 
       <b-button type="submit" variant="primary">Adicionar</b-button>
@@ -57,10 +64,12 @@ export default {
   data: function() {
     return {
       form: {
-        name: ""
+        name: "",
+        email: "",
+        type: ""
       },
       fields: ["id", "name", "email", "show_details", "remove_user"],
-      items: [],      
+      items: [],
       show: true
     };
   },
@@ -106,6 +115,12 @@ export default {
         });
         console.log("c: " + temp);
       }
+      return temp;
+    },
+
+    setType() {
+      let temp;
+      temp = ["Student", "Teacher"]
       return temp;
     }
   },

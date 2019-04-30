@@ -15,7 +15,7 @@
         <b-form-select
           id="input-3"
           v-model="form.unit"
-          :options="setUnits()"
+          :options="getUnits()"
           required
           multiple="true"
         ></b-form-select>
@@ -38,23 +38,21 @@
         <template slot="row-details" slot-scope="row">
           <b-card>
             
-            <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-            <b-form-group id="nameLabel" label="Nome do Curso:" label-for="inputName">
+            <b-form @submit="onSubmit" @reset="onReset">
+            <b-form-group id="nameEditLabel" label="Nome do Curso:" label-for="editName">
               <b-form-input
-                id="inputName"
+                id="editName"
                 v-model="form.name"
                 type="text"
-                required
                 placeholder="Nome do Curso"
               ></b-form-input>
             </b-form-group>
 
-            <b-form-group id="input-group-3" label="Unidades Pedagógicas:" label-for="input-3">
+            <b-form-group id="input-group-4" label="Unidades Pedagógicas:" label-for="input-4">
               <b-form-select
-                id="input-3"
+                id="input-4"
                 v-model="form.unit"
                 :options="getUnits()"
-                required
                 multiple="true"
               ></b-form-select>
             </b-form-group>

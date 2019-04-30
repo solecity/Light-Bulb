@@ -26,14 +26,47 @@
     </b-form>
     <br>
     <div>
-      <b-table
-        striped
-        hover
-        :items="getCouses()"
-        :fields="fields"
-        :bordered="bordered"
-        :outlined="outlined"
-      ></b-table>
+      <b-table :items="getCouses()" :fields="fields" striped>
+        <template slot="editar_curso" slot-scope="row">
+          <b-button size="sm" @click="row.toggleDetails" class="mr-2">Editar Curso</b-button>
+        </template>
+
+        <template slot="remover_curso" slot-scope="row">
+          <b-button size="sm" @click="row.removeUser" class="mr-2">Remover Curso</b-button>
+        </template>
+
+        <template slot="row-details" slot-scope="row">
+          <b-card>
+            
+            <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+            <b-form-group id="nameLabel" label="Nome do Curso:" label-for="inputName">
+              <b-form-input
+                id="inputName"
+                v-model="form.name"
+                type="text"
+                required
+                placeholder="Nome do Curso"
+              ></b-form-input>
+            </b-form-group>
+
+            <b-form-group id="input-group-3" label="Unidades Pedagógicas:" label-for="input-3">
+              <b-form-select
+                id="input-3"
+                v-model="form.unit"
+                :options="setUnits()"
+                required
+                multiple="true"
+              ></b-form-select>
+            </b-form-group>
+
+            <b-button type="submit" variant="primary">Adicionar</b-button>
+            <b-button type="reset" variant="danger">Reset</b-button>
+          </b-form>
+
+            <b-button size="sm" @click="row.toggleDetails">Hide Details</b-button>
+          </b-card>
+        </template>
+      </b-table>
     </div>
   </div>
 </template>
@@ -52,6 +85,7 @@ export default {
       },
       items: [
       ],
+      fields: ["id", "name", "units", "editar_curso", "remover_curso"],
       units: [],
       show: true
     };
@@ -113,7 +147,7 @@ export default {
           {
             id: this.tempCourses[i].id,
             name: this.tempCourses[i].course,
-            units: this.tempCourses[i].courseUnit + ", "
+            units: this.tempCourses[i].courseUnit + " "
           }
         );
         console.log("c: " + temp);

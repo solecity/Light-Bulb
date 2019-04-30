@@ -24,11 +24,11 @@
     <br>
     <div>
       <b-table :items="setItems" :fields="fields" striped>
-        <template slot="show_details" slot-scope="row">
+        <template slot="editar_user" slot-scope="row">
           <b-button size="sm" @click="row.toggleDetails" class="mr-2">Editar Utilizador</b-button>
         </template>
 
-        <template slot="remove_user" slot-scope="row">
+        <template slot="remover_user" slot-scope="row">
           <b-button size="sm" @click="row.removeUser" class="mr-2">Remover Utilizador</b-button>
         </template>
 
@@ -68,7 +68,7 @@ export default {
         email: "",
         type: ""
       },
-      fields: ["id", "name", "email", "show_details", "remove_user"],
+      fields: ["id", "name", "type", "email", "editar_user", "remover_user"],
       items: [],
       show: true
     };

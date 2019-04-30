@@ -1,27 +1,16 @@
 <template>
   <div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group id="nameLabel" label="Nome da Unidade Pedagógica:" label-for="inputName">
+      <b-form-group id="nameLabel" label="Tag:" label-for="inputName">
         <b-form-input
           id="inputName"
-          v-model="form.name"
+          v-model="form.tag"
           type="text"
           required
-          placeholder="Nome da Unidade Pedagógica"
+          placeholder="Tag"
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="yearLabel" label="Ano:" label-for="inputYear">
-        <b-form-input
-          id="inputYear"
-          v-model="form.year"
-          type="number"
-          required
-          min="1"
-          max="3"
-          placeholder="Ano"
-        ></b-form-input>
-      </b-form-group>
 
       <b-button type="submit" variant="primary">Adicionar</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
@@ -31,7 +20,7 @@
       <b-table
         striped
         hover
-        :items="getCouseUnit()"
+        :items="getTags()"
         :fields="fields"
         :bordered="bordered"
         :outlined="outlined"
@@ -49,8 +38,7 @@ export default {
   data: function() {
     return {
       form: {
-        name: "",
-        year: 0
+        tag: ""
       },
       items: [
       ],
@@ -60,13 +48,12 @@ export default {
   },
   created() {
     this.loggedUser = this.$store.state.loggedUser;
-    this.tempCourseUnits = this.$store.state.courseUnits;
-    this.tempCourses = this.$store.state.courses;
+    this.tempTags = this.$store.state.tags;
     //this.tempCourseUnit;
     /* for(let i=0; i<this.tempCourses.length; i++){
       this.tempCourseUnit.push(this.tempCourses[i].courseUnit);
     }*/
-    console.log(this.tempCourseUnits);
+    console.log(this.tempTags);
 
     /********/
     this.tempLoggedId = parseInt(
@@ -81,8 +68,7 @@ export default {
     onReset(evt) {
       evt.preventDefault();
       // Reset our form values
-      this.form.name = "";
-      this.form.year = "";
+      this.form.tag = "";
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
@@ -90,19 +76,18 @@ export default {
       });
     },
 
-    getCouseUnit(){
+    getTags(){
       let temp = [];
-      console.log(this.tempCourseUnits);
-      console.log(this.tempCourseUnits.length);
+      console.log(this.tempTags);
+      console.log(this.tempTags.length);
 
-      for (let i = 0; i < this.tempCourseUnits.length; i++) {
+      for (let i = 0; i < this.tempTags.length; i++) {
         console.log("d: " + i);
         
         temp.push(
           {
-            id: this.tempCourseUnits[i].id,
-            name: this.tempCourseUnits[i].unit,
-            year: this.tempCourseUnits[i].year
+            id: this.tempTags[i].id,
+            tag: this.tempTags[i].tag
           }
         );
         console.log("c: " + temp);

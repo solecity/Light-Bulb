@@ -36,7 +36,7 @@ a:hover {
 }
 
 .container-fluid {
-  background-color: black;
+  background-color: white;
   margin: 0px;
   min-height: 100vh;
 }
@@ -44,14 +44,6 @@ a:hover {
 .container-border {  
   margin: 0px;
   padding: 0px 25px;
-  border-left: 2px solid #ffd150;
-  border-right: 2px solid #ffd150;
-}
-
-.container-half-border {  
-  margin: 0px;
-  padding: 0px 25px;
-  border-left: 2px solid #ffd150;
 }
 
 .subrow {
@@ -74,7 +66,7 @@ a:hover {
 }
 
 .btn {
-  color: white;
+  color: black;
   text-align: center;
   border: none;
   background-color: #ffd150;
@@ -83,7 +75,7 @@ a:hover {
 
 .btn:hover {
   color: black;
-  background-color: white;
+  background-color: black;
 }
 
 .grey {

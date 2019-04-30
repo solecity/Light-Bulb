@@ -1,11 +1,7 @@
 <template>
   <div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group
-        id="nameLabel"
-        label="Nome do Curso:"
-        label-for="inputName"
-      >
+      <b-form-group id="nameLabel" label="Nome do Curso:" label-for="inputName">
         <b-form-input
           id="inputName"
           v-model="form.name"
@@ -16,7 +12,13 @@
       </b-form-group>
 
       <b-form-group id="input-group-3" label="Unidades Pedagógicas:" label-for="input-3">
-        <b-form-select id="input-3" v-model="form.unit" :options="setUnits()" required multiple="true"></b-form-select>
+        <b-form-select
+          id="input-3"
+          v-model="form.unit"
+          :options="setUnits()"
+          required
+          multiple="true"
+        ></b-form-select>
       </b-form-group>
 
       <b-button type="submit" variant="primary">Adicionar</b-button>
@@ -27,7 +29,7 @@
       <b-table
         striped
         hover
-        :items="items"
+        :items="getCouses()"
         :fields="fields"
         :bordered="bordered"
         :outlined="outlined"
@@ -49,25 +51,20 @@ export default {
         unit: ""
       },
       items: [
-        { id: 40, nome: "Dickerson", block: `<i class="fas fa-lock"></i>` },
-        { id: 21, nome: "Larsen", block: '<i class="fas fa-lock"></i>' },
-        { id: 89, nome: "Geneva", block: '<i class="fas fa-lock"></i>' },
-        { id: 38, nome: "Jami", block: '<i class="fas fa-lock"></i>' }
       ],
-      units: [
-        
-      ],
+      units: [],
       show: true
     };
   },
   created() {
     this.loggedUser = this.$store.state.loggedUser;
+    this.tempCourseUnits = this.$store.state.courseUnits;
     this.tempCourses = this.$store.state.courses;
     //this.tempCourseUnit;
-   /* for(let i=0; i<this.tempCourses.length; i++){
+    /* for(let i=0; i<this.tempCourses.length; i++){
       this.tempCourseUnit.push(this.tempCourses[i].courseUnit);
     }*/
-    console.log(this.tempCourseUnit)
+    console.log(this.tempCourseUnits);
 
     /********/
     this.tempLoggedId = parseInt(
@@ -89,23 +86,46 @@ export default {
       this.$nextTick(() => {
         this.show = true;
       });
-    },setUnits
+    },
 
-    (){
-      let tempCourseUnit = [];
-      for(let i=0; i<this.tempCourses.length; i++){
-        tempCourseUnit.push(this.tempCourses[i].courseUnit)
+    setUnits() {
+      let temp = [];
+      console.log(this.tempCourseUnits);
+      console.log(this.tempCourseUnits.length);
+
+      for (let index = 0; index < this.tempCourseUnits.length; index++) {
+        console.log("a: " + index);
+        temp.push(this.tempCourseUnits[index].unit);
+        console.log("b: " + temp);
       }
-      console.log(tempCourseUnit)
-     // console.log(this.tempCourses.length)
-      for (let i = 0; i < tempCourseUnit.length; i++) {
-          let temp = tempCourseUnit[i].unit
-          console.log("oooo")
-       // units.push(temp);
-        return temp
+      return temp;
+    },
+
+    getCouses(){
+      let temp = [];
+      let tempUnits = []
+      console.log(this.tempCourses);
+      console.log(this.tempCourses.length);
+
+      /*for (let j = 0; j < this.tempCourseUnits.length; j++) {
+        tempUnits.push(this.tempCourseUnits[j].id)
+      }*/
+
+      for (let i = 0; i < this.tempCourses.length; i++) {
+        console.log("d: " + i);
+        
+        temp.push(
+          {
+            id: this.tempCourses[i].id,
+            name: this.tempCourses[i].course,
+            units: this.tempCourses[i].courseUnit
+          }
+        );
+        console.log("c: " + temp);
       }
-     // console.log(units)
-    }
+      return temp;
+    },
+    
   },
   computed: {}
 };

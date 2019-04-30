@@ -172,29 +172,29 @@ export default new Vuex.Store({
       {
         id: 1,
         course: "Tecnologias e Sistemas de Informação para a Web",
-        courseUnit: [
-          {
-            id: 1,
-            unit: "Programação para a Web I",
-            year: 2
-          },
-          {
-            id: 2,
-            unit: "Progamação Orientada a Objectos",
-            year: 1
-          }
-        ]
+        courseUnit: [1,2]
       },
       {
         id: 2,
         course: "Design",
-        courseUnit: [
-          {
-            id: 1,
-            unit: "Introdução ao Design",
-            year: 1
-          }
-        ]
+        courseUnit: [3]
+      }
+    ],
+    courseUnits: [
+      {
+        id: 1,
+        unit: "Programação para a Web I",
+        year: 2
+      },
+      {
+        id: 2,
+        unit: "Progamação Orientada a Objectos",
+        year: 1
+      },
+      {
+        id: 3,
+        unit: "Introdução ao Design",
+        year: 1
       }
     ],
     tags: [

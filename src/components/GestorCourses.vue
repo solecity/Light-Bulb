@@ -53,7 +53,7 @@
               <b-form-select
                 id="input-3"
                 v-model="form.unit"
-                :options="setUnits()"
+                :options="getUnits()"
                 required
                 multiple="true"
               ></b-form-select>
@@ -122,7 +122,7 @@ export default {
       });
     },
 
-    setUnits() {
+    getUnits() {
       let temp = [];
       console.log(this.tempCourseUnits);
       console.log(this.tempCourseUnits.length);

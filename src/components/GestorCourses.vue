@@ -103,13 +103,8 @@ export default {
 
     getCouses(){
       let temp = [];
-      let tempUnits = []
       console.log(this.tempCourses);
       console.log(this.tempCourses.length);
-
-      /*for (let j = 0; j < this.tempCourseUnits.length; j++) {
-        tempUnits.push(this.tempCourseUnits[j].id)
-      }*/
 
       for (let i = 0; i < this.tempCourses.length; i++) {
         console.log("d: " + i);
@@ -118,7 +113,7 @@ export default {
           {
             id: this.tempCourses[i].id,
             name: this.tempCourses[i].course,
-            units: this.tempCourses[i].courseUnit
+            units: this.tempCourses[i].courseUnit + ", "
           }
         );
         console.log("c: " + temp);

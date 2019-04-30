@@ -1,34 +1,51 @@
 <template>
   <div>
-    <b-table :items="setItems" :fields="fields" striped>
-      <template slot="show_details" slot-scope="row">
-        <b-button size="sm" @click="row.toggleDetails" class="mr-2">
-          Editar Utilizador
-        </b-button>
-      </template>
+    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form-group id="nameLabel" label="Nome:" label-for="inputName">
+        <b-form-input
+          id="inputName"
+          v-model="form.name"
+          type="text"
+          required
+          placeholder="Nome"
+        ></b-form-input>
+      </b-form-group>
 
-      <template slot="remove_user" slot-scope="row">
-        <b-button size="sm" @click="row.removeUser" class="mr-2">
-          Remover Utilizador
-        </b-button>
-      </template>
+      <b-button type="submit" variant="primary">Adicionar</b-button>
+      <b-button type="reset" variant="danger">Reset</b-button>
+    </b-form>
+    <br>
+    <div>
+      <b-table :items="setItems" :fields="fields" striped>
+        <template slot="show_details" slot-scope="row">
+          <b-button size="sm" @click="row.toggleDetails" class="mr-2">Editar Utilizador</b-button>
+        </template>
 
-      <template slot="row-details" slot-scope="row">
-        <b-card>
-          <b-row class="mb-2">
-            <b-col sm="3" class="text-sm-right"><b>ID:</b></b-col>
-            <b-col>{{ row.item.id }}</b-col>
-          </b-row>
+        <template slot="remove_user" slot-scope="row">
+          <b-button size="sm" @click="row.removeUser" class="mr-2">Remover Utilizador</b-button>
+        </template>
 
-          <b-row class="mb-2">
-            <b-col sm="3" class="text-sm-right"><b>Is Active:</b></b-col>
-            <b-col>{{ row.item.isActive }}</b-col>
-          </b-row>
+        <template slot="row-details" slot-scope="row">
+          <b-card>
+            <b-row class="mb-2">
+              <b-col sm="3" class="text-sm-right">
+                <b>ID:</b>
+              </b-col>
+              <b-col>{{ row.item.id }}</b-col>
+            </b-row>
 
-          <b-button size="sm" @click="row.toggleDetails">Hide Details</b-button>
-        </b-card>
-      </template>
-    </b-table>
+            <b-row class="mb-2">
+              <b-col sm="3" class="text-sm-right">
+                <b>Is Active:</b>
+              </b-col>
+              <b-col>{{ row.item.isActive }}</b-col>
+            </b-row>
+
+            <b-button size="sm" @click="row.toggleDetails">Hide Details</b-button>
+          </b-card>
+        </template>
+      </b-table>
+    </div>
   </div>
 </template>
 
@@ -39,10 +56,12 @@ export default {
   name: "gestor",
   data: function() {
     return {
-        fields: ['id', 'name', 'email', 'show_details', 'remove_user'],
-        items: [
-          
-        ]
+      form: {
+        name: ""
+      },
+      fields: ["id", "name", "email", "show_details", "remove_user"],
+      items: [],      
+      show: true
     };
   },
   created() {
@@ -55,24 +74,42 @@ export default {
     );
   },
   methods: {
-    setItems(){
-      console.log(this.tempUsers.length)
+    onSubmit(evt) {
+      evt.preventDefault();
+      alert(JSON.stringify(this.form));
+    },
+    onReset(evt) {
+      evt.preventDefault();
+      // Reset our form values
+      this.form.name = "";
+      this.form.unit = "";
+      // Trick to reset/clear native browser form validation state
+      this.show = false;
+      this.$nextTick(() => {
+        this.show = true;
+      });
+    },
+
+    setItems() {
+      let temp = [];
+      console.log(this.tempUsers);
+      console.log(this.tempUsers.length);
+
       for (let i = 0; i < this.tempUsers.length; i++) {
-        let temp = {
-          isActive: true,
+        console.log("d: " + i);
+
+        temp.push({
           id: this.tempUsers[i].id,
           name: this.tempUsers[i].name,
+          type: this.tempUsers[i].type,
           email: this.tempUsers[i].email
-        }
-        items.push(temp);
+        });
+        console.log("c: " + temp);
       }
-      console.log(items)
-      return items
+      return temp;
     }
   },
-  computed: {
-    
-  }
+  computed: {}
 };
 </script>
 

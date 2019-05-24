@@ -44,7 +44,7 @@ export default {
     getCourseByUnitId(unitId) {
       let tempUnitIds = []
       for (let i = 0; i < this.tempCourses.length; i++) {
-        if (unitId == this.tempCourseUnits[i].course[this.tempCourseUnits[i].course.length]) {
+        if (unitId == this.tempCourses[i].courseUnit[this.tempCourses[i].courseUnit.length]) {
           tempUnitIds.push(unitId)
         }
 

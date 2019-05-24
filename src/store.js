@@ -171,31 +171,30 @@ export default new Vuex.Store({
     courses: [
       {
         id: 1,
-        course: "Tecnologias e Sistemas de Informação para a Web"
+        course: "Tecnologias e Sistemas de Informação para a Web",
+        courseUnit: [1,2]
       },
       {
         id: 2,
-        course: "Design"
+        course: "Design",
+        courseUnit: [3]
       }
     ],
     courseUnits: [
       {
         id: 1,
         unit: "Programação para a Web I",
-        year: 2,
-        course: [1]
+        year: 2
       },
       {
         id: 2,
         unit: "Progamação Orientada a Objectos",
-        year: 1,
-        course: [1]
+        year: 1
       },
       {
         id: 3,
         unit: "Introdução ao Design",
-        year: 1,
-        course: [2]
+        year: 1
       }
     ],
     tags: [
@@ -470,7 +469,6 @@ export default new Vuex.Store({
       }
       return tempUnit;
     },
-    
     getUnitsByCourseId: state => id => {
       let tempUnits = [];
       for (let i = 0; i < state.courses.length; i++) {
@@ -480,15 +478,12 @@ export default new Vuex.Store({
       }
       return tempUnits;
     },
-
     getLevelById: state => id => {
       return state.levels.find(level => level.id == id);
     },
-
     getMedalById: state => id => {
       return state.medals.find(medal => medal.id == id);
     },
-
     checkUserUnitsById: state => newUnit => {
       let error = "";
 

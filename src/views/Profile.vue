@@ -7,7 +7,7 @@
         <b-col sm="2">
           <Leftbar/>
         </b-col>
-        <b-col sm="10" class="container-half-border">
+        <b-col sm="10" class="container-border">
           <Profile/>
         </b-col>
       </b-row>

@@ -6,7 +6,7 @@
       </li>
       <li>
         <router-link :to="{ name: 'courses' }" :class="{ 'nav-link': true }">Unidades Pedagógicas</router-link>
-        <ul id="signInUnits">
+        <ul id="signInUnits" class="list-unstyled">
           <li v-for="unit in userUnits" :key="unit.id">{{ unit.name }}</li>
         </ul>
       </li>
@@ -81,20 +81,18 @@ export default {
   height: 700px;
   overflow: hidden;
   padding-right: 20px;
+  margin-left: 0px;
+  background-color: #ffd150;
 }
 
 #leftbar ul {
   padding-top: 50px;
 }
 
-#leftbar li {
-  border-bottom: 0.5px solid #ffd050ad;
-}
-
 #leftbar a {
   text-align: left;
   text-decoration: none;
-  color: white;
+  color: black;
 }
 
 #signInUnits {
@@ -104,6 +102,7 @@ export default {
 }
 
 #signInUnits li {
-  color: white;
+  padding: 0px 0px 0px 40px;
+  color: black;
 }
 </style>

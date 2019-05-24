@@ -242,7 +242,7 @@ export default new Vuex.Store({
         maxXP: 100
       }
     ],
-    top: 10,
+    top: 10
   },
   mutations: {
     SET_LOGGED_USER(state, payload) {

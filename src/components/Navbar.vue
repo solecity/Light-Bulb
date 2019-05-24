@@ -39,6 +39,7 @@
             <span>&nbsp;{{ activeUser.name }}</span>
           </template>
           <b-dropdown-item href="#" @click="userProfile()">Perfil</b-dropdown-item>
+          <b-dropdown-item href="#" @click="userProfile()">Painel de controlo</b-dropdown-item>
           <b-dropdown-item href="#" @click="logout()">Logout</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
@@ -89,9 +90,14 @@ export default {
 
 
 <style scoped>
+.fa {
+  color: #ffd150 !important;
+}
+
 #navbar {
   height: 50px;
   padding: 50px;
+  background-color: black;
 }
 
 #profilePic {
@@ -106,15 +112,16 @@ ul {
 a {
   padding-right: 5px;
   padding-left: 5px;
+  color: black;
 }
 
 span {
-  color: black;
+  color: white;
   margin-left: 5px;
 }
 
 #search {
-  border: 1px solid black;
+  border: 1px solid white;
 }
 
 .btn {

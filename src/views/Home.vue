@@ -4,7 +4,7 @@
 
     <b-container fluid>
       <b-row>
-        <b-col sm="2">
+        <b-col sm="2" style="padding-left: 0px;">
           <Leftbar/>
         </b-col>
         <b-col sm="7" class="container-border">

@@ -31,6 +31,8 @@ export default {
   },
   created() {
     this.loggedUser = this.$store.state.loggedUser;
+    this.tempCourseUnits = this.$store.state.courseUnits;
+    this.tempCourses = this.$store.state.courses;
 
     /********/
     this.tempLoggedId = parseInt(
@@ -38,6 +40,18 @@ export default {
     );
   },
   methods: {
+
+    getCourseByUnitId(unitId) {
+      let tempUnitIds
+      for (let i = 0; i < this.tempCourses.length; i++) {
+        if (unitId == this.tempCourses[i].courseUnit) {
+          
+        }
+
+      }
+
+      return tempUnitIds
+    }
     
   },
   computed: {
@@ -47,11 +61,11 @@ export default {
       this.tempIds = this.getUnitsByUserId(this.tempLoggedId);
       let tempUserUnits = []
 
-      for (let i = 0; i < this.tempIds.length; i++) {
+      for (let i = 0; i < this.tempCourseUnits.length; i++) {
         let tempUnit = {
-          id: this.tempIds[i].unitId,
-          name: this.getUnitByCourseId(this.tempIds[i].courseId, this.tempIds[i].unitId),
-          courseId: this.tempIds[i].courseId
+          id: this.tempCourseUnits[i].id,
+          name: this.tempCourseUnits[i].unit,
+          courseId: this.tempCourseUnits[i].courseId
         }
         tempUserUnits.push(tempUnit);
       }

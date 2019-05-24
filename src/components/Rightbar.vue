@@ -95,6 +95,7 @@ export default {
 
 #rightbar ul {
   padding-top: 50px;
+  color: black;
 }
 
 #rightbar li {
@@ -103,6 +104,7 @@ export default {
 
 #rightbar h6 {
   margin-top: 50px;
+  color: black;
 }
 
 #rightbar img {
@@ -114,5 +116,6 @@ export default {
   border-bottom: 1px solid #ffd050ad !important;
   text-align: left;
   font-size: 16px;
+  color: black;
 }
 </style>

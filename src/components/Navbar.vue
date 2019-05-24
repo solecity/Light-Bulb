@@ -27,11 +27,6 @@
             <i class="fa fa-award fa-lg" aria-hidden="true"></i>
           </router-link>
         </b-nav-item>
-        <b-nav-item href="#">
-          <router-link :to="{ name: 'gestor'}" :class="{ 'nav-link': true }">
-            Gestor
-          </router-link>
-        </b-nav-item>
 
         <b-nav-item-dropdown id="profileNavbar" right>
           <template slot="button-content">
@@ -41,6 +36,11 @@
           <b-dropdown-item href="#" @click="userProfile()">Perfil</b-dropdown-item>
           <b-dropdown-item href="#" @click="userProfile()">Painel de controlo</b-dropdown-item>
           <b-dropdown-item href="#" @click="logout()">Logout</b-dropdown-item>
+          <b-dropdown-item href="#">
+            <router-link :to="{ name: 'gestor'}" :class="{ 'nav-link': true }">
+              Gestor
+            </router-link>
+          </b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>

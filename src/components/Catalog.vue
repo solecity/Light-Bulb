@@ -220,12 +220,13 @@ function orderQuestionsByAnswers(a, b) {
 
 <style>
 .catalog h2, .catalog h5, .catalog p, .catalog .fa {
-  color: white;
+  color: black;
 }
 
 .catalog p {
   display: inline-block;
   margin-right: 6px;
+  color: black;
 }
 
 .row1 {
@@ -261,6 +262,7 @@ function orderQuestionsByAnswers(a, b) {
 
 #filter .text {
   padding: 5px;
+  color: white;
 }
 
 #filter i {
@@ -275,6 +277,10 @@ function orderQuestionsByAnswers(a, b) {
   right: 0;
   bottom: 0;
   margin: auto;
+}
+
+#newQuestion .text {
+  color: white;
 }
 
 .questionCourse {

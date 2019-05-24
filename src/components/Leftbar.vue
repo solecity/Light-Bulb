@@ -42,10 +42,10 @@ export default {
   methods: {
 
     getCourseByUnitId(unitId) {
-      let tempUnitIds
+      let tempUnitIds = []
       for (let i = 0; i < this.tempCourses.length; i++) {
-        if (unitId == this.tempCourses[i].courseUnit) {
-          
+        if (unitId == this.tempCourses[i].courseUnit[this.tempCourses[i].courseUnit.length]) {
+          tempUnitIds.push(unitId)
         }
 
       }
@@ -65,7 +65,7 @@ export default {
         let tempUnit = {
           id: this.tempCourseUnits[i].id,
           name: this.tempCourseUnits[i].unit,
-          courseId: this.tempCourseUnits[i].courseId
+          courseId: this.getCourseByUnitId(this.tempCourseUnits[i].id)
         }
         tempUserUnits.push(tempUnit);
       }

@@ -4,7 +4,7 @@
 
     <b-navbar-brand href="#" id="logo">
       <router-link :to="{ name: 'home' }" :class="{ 'nav-link': true }">
-        <img src="@/assets/logo_lb.png" alt="logo.png" height="50">
+        <img src="@/assets/logo_2.png" alt="logo.png" height="50">
       </router-link>
     </b-navbar-brand>
 

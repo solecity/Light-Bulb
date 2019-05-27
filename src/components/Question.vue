@@ -374,6 +374,7 @@ export default {
 
 #answersTab h5 {
   margin-bottom: 0px;
+  color: black;
 }
 
 #newAnswer .form-control {
@@ -382,6 +383,10 @@ export default {
 
 #newAnswer .btn {
   float: right;
+}
+
+#newAnswer .text {
+  color: black;
 }
 
 #lock {

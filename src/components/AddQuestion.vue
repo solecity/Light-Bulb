@@ -8,7 +8,7 @@
       <b-row class="subrow frmQuestion">
         <b-form id="frmQuestion">
           <b-form-group label="Título" label-for="inputTitle">
-            <b-form-input id="inputTitle" v-model="form.title" type="text" required></b-form-input>
+            <b-form-input id="inputTitle" v-model="form.title" type="text" placeholder="Pergunta" required></b-form-input>
           </b-form-group>
           <b-form-group label="Descrição" label-for="inputDescription">
             <b-form-textarea
@@ -16,13 +16,14 @@
               v-model="form.description"
               :rows="5"
               :max-rows="100"
+              placeholder="Descrição"
               required
             ></b-form-textarea>
           </b-form-group>
 
-          <div class="form-group">
+          <div id="img" class="form-group">
             <label for="inputPhoto">Imagens (Opcional)</label>
-            <input type="url" class="form-control" id="inputPhoto">
+            <input type="url" class="form-control" id="inputPhoto" placeholder="Imagem">
           </div>
 
           <!--<div class="form-group">
@@ -196,7 +197,7 @@ export default {
 
 <style>
 .newQuestion h2 {
-  color: white;
+  color: black;
 }
 
 .frmQuestion {
@@ -209,7 +210,17 @@ export default {
   text-align: left;
 }
 
+#frmQuestion .text {
+  
+  color: black;
+}
+
 #frmQuestion .btn {
   float: right;
+  color: white;
+}
+
+#img {
+  color: black;
 }
 </style>

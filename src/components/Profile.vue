@@ -216,11 +216,11 @@ export default {
 h4,
 h3 {
   font-weight: bold;
-  color: white;
+  color: black;
 }
 
 .profile p {
-  color: white;
+  color: black;
   font-size: 14px;
   margin-bottom: 10px;
 }

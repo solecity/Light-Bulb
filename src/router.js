@@ -13,6 +13,7 @@ import GestorUsers from "./views/GestorUsers.vue";
 import GestorCourses from "./views/GestorCourses.vue";
 import GestorCourseUnit from "./views/GestorCourseUnit.vue";
 import GestorTags from "./views/GestorTags.vue";
+import CourseUnit from "./views/CourseUnit.vue";
 
 Vue.use(Router);
 
@@ -82,6 +83,11 @@ export default new Router({
       path: "/gestorTags",
       name: "gestorTags",
       component: GestorTags
+    },
+    {
+      path: "/courseUnit",
+      name: "courseUnit",
+      component: CourseUnit
     }
   ]
 });

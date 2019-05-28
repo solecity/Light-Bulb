@@ -470,13 +470,23 @@ export default new Vuex.Store({
       return tempUnit;
     },
     getUnitsByCourseId: state => id => {
-      let tempUnits = [];
+     // let tempCourseUnits;
+      let tempUnits;
+      let tempUnits2 = [];
       for (let i = 0; i < state.courses.length; i++) {
+        //tempCourseUnits = state.courses[i].courseUnit
         if (state.courses[i].id == id) {
-          tempUnits.push(state.courses[i].courseUnit);
+          tempUnits = state.courses[i].courseUnit;
         }
       }
-      return tempUnits;
+
+      for (let i = 0; i < state.courseUnits.length; i++) {
+        if(tempUnits[tempUnits.length] == state.courseUnits[i].id){
+          tempUnits2.push(state.courseUnits[i].unit)
+        }
+      }
+      console.log("j: " + tempUnits2)
+      return tempUnits2;
     },
     getLevelById: state => id => {
       return state.levels.find(level => level.id == id);
@@ -509,6 +519,19 @@ export default new Vuex.Store({
       }
       return [...new Set(tempArray)];
     },
+
+    checkCourseUnitLabel: state => {
+      let tempArray = [];
+      for (let i = 0; i < state.courseUnits.length; i++) {
+        let tempUnit = {
+          id: state.courseUnits[i].id,
+          unit: state.courseUnits[i].unit
+        };
+        tempArray.push(tempUnit);
+      }
+      return [...new Set(tempArray)];
+    },
+
     getTodaysDate() {
       let today = new Date();
       let dd = today.getDate();

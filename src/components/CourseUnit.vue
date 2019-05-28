@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-card title="AAA" tag="article" style="max-width: 20rem;" class="mb-2">
-      <b-card-text>{{ unit.unit }}</b-card-text>
+      <b-card-text id="textUnit">{{ unit.unit }}</b-card-text>
       <b-button @click="signIn(course.id, unit.id)" class="btn" type="button">Inscrever</b-button>
       <b-button @click="info(course.id, unit.id)" class="btn" type="button">
         <i class="fas fa-info-circle"></i>
@@ -32,7 +32,7 @@ export default {
     );
 
     this.courses = this.checkCourseLabel;
-    //this.units = this.checkCourseUnitLabel;
+    this.units = this.checkCourseUnitLabel;
   },
   methods: {
     unitValidation(newUnit) {
@@ -69,7 +69,8 @@ export default {
       "getUsers",
       "getCourses",
       "checkUserUnitsById",
-      "checkCourseLabel"
+      "checkCourseLabel",
+      "checkCourseUnitLabel"
     ])
   }
 };
@@ -77,11 +78,15 @@ export default {
 
 
 <style>
+#textUnit{
+  color: black;
+}
 .card-title h4 {
   color: black !important;
 }
 #signInUnit p {
   margin-top: 20px;
+  color: black;
 }
 
 #signInBtn {

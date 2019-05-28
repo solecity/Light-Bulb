@@ -14,7 +14,7 @@
             </b-col>
           </b-row>
 
-          <b-row v-for="unit in course.courseUnit" :key="unit.id">
+          <b-row v-for="unit in getUnitsByCourseId(course.id)" :key="unit.id">
             <b-col md="8" id="signInUnit" class="text-left">
               <p>{{ unit.unit }}</p>
             </b-col>
@@ -89,6 +89,7 @@ export default {
     ...mapGetters([
       "getUsers",
       "getCourses",
+      "getUnitsByCourseId",
       "checkUserUnitsById",
       "checkCourseLabel"
     ])
@@ -124,6 +125,7 @@ export default {
 
 #signInUnit p {
   margin-top: 20px;
+  color: black;
 }
 
 #signInBtn {

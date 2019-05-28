@@ -5,7 +5,7 @@
         <router-link :to="{ name: 'home' }" :class="{ 'nav-link': true }">Home</router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'courseUnit' }" :class="{ 'nav-link': true }">Unidades Pedagógicas</router-link>
+        <router-link :to="{ name: 'courses' }" :class="{ 'nav-link': true }">Unidades Pedagógicas</router-link>
         <ul id="signInUnits" class="list-unstyled">
           <li v-for="unit in userUnits" :key="unit.id">{{ unit.name }}</li>
         </ul>

@@ -491,7 +491,7 @@ export default new Vuex.Store({
       for (let i = 0; i < state.courseUnits.length; i++) {
         for (let j = 0; j < tempUnits.length; j++) {
           console.log("k: " + state.courseUnits[i].id)
-          if(tempUnits[j] == state.courseUnits[i].id && tempUnits == state.courseUnits[i].id){
+          if(tempUnits[j] == state.courseUnits[i].id && tempUnits[j] == state.courseUnits[i].id){
             tempUnits2.push(state.courseUnits[i])
             console.log("aaa")
           }

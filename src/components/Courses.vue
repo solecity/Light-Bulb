@@ -9,7 +9,7 @@
       <b-row class="subrow courseList">
         <b-col md="12" v-for="course in getCourses" :key="course.id" class="course">
           <b-row>
-            <b-col md="12" id="courseTitle" class="text-left">
+            <b-col md="12" id="courseTitle" class="text-left" v-model="form.course">
               <h5>{{ course.course }}</h5>
             </b-col>
           </b-row>
@@ -22,13 +22,20 @@
               <b-button @click="signIn(course.id, unit.id)" class="btn" type="button">Inscrever</b-button>
             </b-col>
             <b-col md="1" id="infoBtn">
-              <b-button class="btn" type="button">
+              <b-button v-b-modal.modal-1 class="btn" type="button">
                 <i class="fas fa-info-circle"></i>
               </b-button>
             </b-col>
           </b-row>
         </b-col>
       </b-row>
+
+      <div >
+        <b-modal id="modal-1" title="Info" v-for="course in getCourses" :key="course.id">
+          <p class="my-4">{{course.course}}</p>
+        </b-modal>
+      </div>
+
     </div>
   </b-container>
 </template>
@@ -42,7 +49,10 @@ export default {
   data: function() {
     return {
       courses: [],
-      units: []
+      units: [],
+      form: {
+        course: ""
+      }
     };
   },
   created() {

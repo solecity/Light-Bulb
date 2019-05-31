@@ -107,6 +107,7 @@ export default {
 
       const tempCourses = await axios.get('/link/', config);
       this.tempCourses = tempCourses.data.courses
+      
       /*this.tempCourses = []
 
       axios.get('https://teste-ginasio-diogof98.c9users.io/').then(res => {

@@ -55,11 +55,11 @@ export default {
       } else {
         valid = false;
       }
-      
+
       return {
         valid: valid,
         msg: this.checkLogin(login).error,
-        userId: this.checkLogin(login).userId,
+        userId: this.checkLogin(login).userId
       };
     }
   },

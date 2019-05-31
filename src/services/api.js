@@ -6,18 +6,6 @@ export default () => {
     })
 }
 
-/*function getCourses() {
-    var resultElement = document.getElementById('getResult1');
-    resultElement.innerHTML = '';
-    axios.get('http://jsonplaceholder.typicode.com/todos')
-    .then(function (response) {
-        resultElement.innerHTML = generateSuccessHTMLOutput(response);
-    })
-    .catch(function (error) {
-        resultElement.innerHTML = generateErrorHTMLOutput(error);
-    });
-}*/
-
 async function getUser() {
     try {
         const response = await axios.get('/user?ID=12345');
@@ -41,6 +29,24 @@ function getTags(){
 
     axios.get('https://teste-ginasio-diogof98.c9users.io/').then(res => {
       tempTags = res.data
+      console.log(res.data);
+    });
+}
+
+function getCourseUnits(){
+    let tempCourseUnits = []
+
+    axios.get('https://teste-ginasio-diogof98.c9users.io/').then(res => {
+        tempCourseUnits = res.data
+      console.log(res.data);
+    });
+}
+
+function getQuestions(){
+    let tempQuestions = []
+
+    axios.get('https://teste-ginasio-diogof98.c9users.io/').then(res => {
+        tempQuestions = res.data
       console.log(res.data);
     });
 }

@@ -65,6 +65,13 @@ export default {
 
     this.courses = this.checkCourseLabel;
     //this.units = this.checkCourseUnitLabel;
+
+    this.tempCourses = []
+
+    axios.get('https://teste-ginasio-diogof98.c9users.io/').then(res => {
+      this.tempCourses = res.data
+      console.log(res.data);
+    });
   },
   methods: {
     unitValidation(newUnit) {

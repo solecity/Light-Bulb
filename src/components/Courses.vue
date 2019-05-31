@@ -22,13 +22,21 @@
               <b-button @click="signIn(course.id, unit.id)" class="btn" type="button">Inscrever</b-button>
             </b-col>
             <b-col md="1" id="infoBtn">
-              <b-button class="btn" type="button">
+              <b-button v-b-modal.modal-1 class="btn" type="button">
                 <i class="fas fa-info-circle"></i>
               </b-button>
-            </b-col>
+            </b-col>            
+            <div v-for="courseUnit in course.courseUnit" :key="courseUnit">
+              <b-modal id="modal-1" title="Info" v-if="courseUnit == unit.id">
+                <p class="my-4">{{unit.unit}}</p>
+              </b-modal>
+            </div>
+
           </b-row>
         </b-col>
       </b-row>
+
+
     </div>
   </b-container>
 </template>

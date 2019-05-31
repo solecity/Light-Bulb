@@ -34,13 +34,8 @@
             <span>&nbsp;{{ activeUser.name }}</span>
           </template>
           <b-dropdown-item href="#" @click="userProfile()">Perfil</b-dropdown-item>
-          <b-dropdown-item href="#" @click="userProfile()">Painel de controlo</b-dropdown-item>
+          <b-dropdown-item href="#" @click="ControlPanel()">Painel de controlo</b-dropdown-item>
           <b-dropdown-item href="#" @click="logout()">Logout</b-dropdown-item>
-          <b-dropdown-item href="#">
-            <router-link :to="{ name: 'gestor'}" :class="{ 'nav-link': true }">
-              Gestor
-            </router-link>
-          </b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
@@ -75,6 +70,9 @@ export default {
   methods: {
     userProfile() {
       this.$router.push({ name: "profile" });
+    },
+    ControlPanel() {
+      this.$router.push({ name: "gestor" });
     },
     logout() {
       this.$store.dispatch("set_logged_user", 0);

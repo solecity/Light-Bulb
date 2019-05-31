@@ -29,6 +29,8 @@
             <div v-for="courseUnit in course.courseUnit" :key="courseUnit">
               <b-modal id="modal-1" title="Info" v-if="courseUnit == unit.id">
                 <p class="my-4">{{unit.unit}}</p>
+                <br>
+                <p class="my-4">{{unit.year}}º Ano</p>
               </b-modal>
             </div>
 

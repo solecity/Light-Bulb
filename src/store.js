@@ -317,19 +317,33 @@ export default new Vuex.Store({
         }
       }
     },
-
     SET_USERS(state, users){
       state.users = users
+    },
+    SET_COURSES(state, courses){
+      state.courses = courses
     }
   },
   actions: {
     loadUsers({commit}) {
       axios
-        .get('link')
+        .get('link_users')
         .then(data => {
           console.log(data.data)
           let users = data.data
           commit('SET_USERS', users)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    loadCourses({commit}) {
+      axios
+        .get('link_courses')
+        .then(data => {
+          console.log(data.data)
+          let courses = data.data
+          commit('SET_COURSES', courses)
         })
         .catch(error => {
           console.log(error)

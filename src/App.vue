@@ -10,10 +10,12 @@ export default {
   name: 'app',
   mounted() {
     this.$store.dispatch('loadUsers')
+    this.$store.dispatch('loadCourses')
   },
   computed:{
     ...mapState([
-      'users'
+      'users',
+      'courses'
     ])
   }
 }

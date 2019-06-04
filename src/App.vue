@@ -5,22 +5,18 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import { mapState } from "vuex";
 export default {
-  name: 'app',
+  name: "app",
   mounted() {
-    this.$store.dispatch('loadUsers')
-    this.$store.dispatch('loadCourses')
-    this.$store.dispatch('loadQuestions')
+    this.$store.dispatch("loadUsers");
+    this.$store.dispatch("loadCourses");
+    this.$store.dispatch("loadQuestions");
   },
-  computed:{
-    ...mapState([
-      'users',
-      'courses',
-      'questions'
-    ])
+  computed: {
+    ...mapState(["users", "courses", "questions"])
   }
-}
+};
 </script>
 
 
@@ -61,7 +57,7 @@ a:hover {
   min-height: 100vh;
 }
 
-.container-border {  
+.container-border {
   margin: 0px;
   padding: 0px 25px;
 }

@@ -351,7 +351,7 @@ export default new Vuex.Store({
         .catch(error => {
           console.log(error)
         })
-    },    
+    },
     loadQuestions({ commit }) {
       axios
         .get('link_questions')

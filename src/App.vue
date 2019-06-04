@@ -11,11 +11,13 @@ export default {
   mounted() {
     this.$store.dispatch('loadUsers')
     this.$store.dispatch('loadCourses')
+    this.$store.dispatch('loadQuestions')
   },
   computed:{
     ...mapState([
       'users',
-      'courses'
+      'courses',
+      'questions'
     ])
   }
 }

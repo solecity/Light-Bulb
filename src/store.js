@@ -173,7 +173,7 @@ export default new Vuex.Store({
       {
         id: 1,
         course: "Tecnologias e Sistemas de Informação para a Web",
-        courseUnit: [1,2]
+        courseUnit: [1, 2]
       },
       {
         id: 2,
@@ -317,15 +317,18 @@ export default new Vuex.Store({
         }
       }
     },
-    SET_USERS(state, users){
+    SET_USERS(state, users) {
       state.users = users
     },
-    SET_COURSES(state, courses){
+    SET_COURSES(state, courses) {
       state.courses = courses
+    },
+    SET_QUESTIONS(state, questions) {
+      state.questions = questions
     }
   },
   actions: {
-    loadUsers({commit}) {
+    loadUsers({ commit }) {
       axios
         .get('link_users')
         .then(data => {
@@ -337,13 +340,25 @@ export default new Vuex.Store({
           console.log(error)
         })
     },
-    loadCourses({commit}) {
+    loadCourses({ commit }) {
       axios
         .get('link_courses')
         .then(data => {
           console.log(data.data)
           let courses = data.data
           commit('SET_COURSES', courses)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },    
+    loadQuestions({ commit }) {
+      axios
+        .get('link_questions')
+        .then(data => {
+          console.log(data.data)
+          let questions = data.data
+          commit('SET_QUESTIONS', questions)
         })
         .catch(error => {
           console.log(error)
@@ -398,9 +413,9 @@ export default new Vuex.Store({
     getTags: state => state.tags,
     getMedals: state => state.medals,
     getLevels: state => state.levels,
-   /* getUnitsByCourseId: state => {
-      let tempUnits
-    },*/
+    /* getUnitsByCourseId: state => {
+       let tempUnits
+     },*/
     checkLogin: state => login => {
       let error = "";
       if (state.users.find(user => user.email === login.email) != null) {
@@ -505,7 +520,7 @@ export default new Vuex.Store({
       return tempUnit;
     },
     getUnitsByCourseId: state => id => {
-     // let tempCourseUnits;
+      // let tempCourseUnits;
       let tempUnits = [];
       let tempUnits2 = [];
       let cont;
@@ -516,19 +531,19 @@ export default new Vuex.Store({
         }
       }
 
-     // tempUnits.splice(",")
-      console.log(tempUnits[tempUnits.length-1])
+      // tempUnits.splice(",")
+      console.log(tempUnits[tempUnits.length - 1])
 
       for (let i = 0; i < state.courseUnits.length; i++) {
         for (let j = 0; j < tempUnits.length; j++) {
           console.log("k: " + state.courseUnits[i].id)
-          if(tempUnits[j] == state.courseUnits[i].id && tempUnits[j] == state.courseUnits[i].id){
+          if (tempUnits[j] == state.courseUnits[i].id && tempUnits[j] == state.courseUnits[i].id) {
             tempUnits2.push(state.courseUnits[i])
             console.log("aaa")
           }
         }
       }
-      console.log("j: " + tempUnits[tempUnits.length-1])
+      console.log("j: " + tempUnits[tempUnits.length - 1])
       return tempUnits2;
     },
     getLevelById: state => id => {

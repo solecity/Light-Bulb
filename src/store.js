@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
 
-Vue.use(Vuex);
+Vue.use(Vuex, axios);
 
 export default new Vuex.Store({
   state: {
@@ -315,9 +316,25 @@ export default new Vuex.Store({
           state.users[i].gameElements.medals.push(payload.medal);
         }
       }
+    },
+
+    SET_USERS(state, users){
+      state.users = users
     }
   },
   actions: {
+    loadUsers({commit}) {
+      axios
+        .get('link')
+        .then(data => {
+          console.log(data.data)
+          let users = data.data
+          commit('SET_USERS', users)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
     set_logged_user(context, payload) {
       context.commit("SET_LOGGED_USER", payload);
     },

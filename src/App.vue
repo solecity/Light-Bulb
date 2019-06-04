@@ -4,6 +4,22 @@
   </div>
 </template>
 
+<script>
+import {mapState} from 'vuex'
+export default {
+  name: 'app',
+  mounted() {
+    this.$store.dispatch('loadUsers')
+  },
+  computed:{
+    ...mapState([
+      'users'
+    ])
+  }
+}
+</script>
+
+
 <style>
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;

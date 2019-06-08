@@ -47,7 +47,7 @@ export default new Vuex.Store({
           reputation: 0
         }
       },
-      {
+      /*{
         id: 2,
         type: "teacher",
         name: "João Torres",
@@ -84,10 +84,10 @@ export default new Vuex.Store({
           medals: [],
           reputation: 0
         }
-      }
+      }*/
     ],
     questions: [
-      {
+     /* {
         id: 1,
         title: "Quando é a entrega?",
         description:
@@ -167,10 +167,10 @@ export default new Vuex.Store({
           }
         ],
         followers: [1]
-      }
+      }*/
     ],
     courses: [
-      {
+     /* {
         id: 1,
         course: "Tecnologias e Sistemas de Informação para a Web",
         courseUnit: [1, 2]
@@ -179,10 +179,10 @@ export default new Vuex.Store({
         id: 2,
         course: "Design",
         courseUnit: [3]
-      }
+      }*/
     ],
     courseUnits: [
-      {
+      /*{
         id: 1,
         unit: "Programação para a Web I",
         year: 2
@@ -196,21 +196,21 @@ export default new Vuex.Store({
         id: 3,
         unit: "Introdução ao Design",
         year: 1
-      }
+      }*/
     ],
     tags: [
-      {
+      /*{
         id: 1,
         tag: "poo"
       },
       {
         id: 2,
         tag: "css"
-      }
+      }*/
     ],
     notifications: [],
     medals: [
-      {
+      /*{
         id: 1,
         label: "Bem-vindo",
         type: "bronze"
@@ -224,10 +224,10 @@ export default new Vuex.Store({
         id: 3,
         label: "1a resposta",
         type: "bronze"
-      }
+      }*/
     ],
     levels: [
-      {
+     /* {
         id: 1,
         label: "Principiante",
         maxXP: 25
@@ -241,7 +241,7 @@ export default new Vuex.Store({
         id: 3,
         label: "Mestre",
         maxXP: 100
-      }
+      }*/
     ],
     top: 10
   },
@@ -325,12 +325,15 @@ export default new Vuex.Store({
     },
     SET_QUESTIONS(state, questions) {
       state.questions = questions
+    },
+    SET_ANSWERS(state, answers) {
+      state.answers = answers
     }
   },
   actions: {
     loadUsers({ commit }) {
       axios
-        .get('link_users')
+        .get('https://lightbulbserver1819.herokuapp.com/users')
         .then(data => {
           console.log(data.data)
           let users = data.data
@@ -342,7 +345,7 @@ export default new Vuex.Store({
     },
     loadCourses({ commit }) {
       axios
-        .get('link_courses')
+        .get('https://lightbulbserver1819.herokuapp.com/courses')
         .then(data => {
           console.log(data.data)
           let courses = data.data
@@ -354,7 +357,7 @@ export default new Vuex.Store({
     },
     loadQuestions({ commit }) {
       axios
-        .get('link_questions')
+        .get('https://lightbulbserver1819.herokuapp.com/questions')
         .then(data => {
           console.log(data.data)
           let questions = data.data
@@ -363,6 +366,21 @@ export default new Vuex.Store({
         .catch(error => {
           console.log(error)
         })
+    },
+    loadAnswers({ commit }) {
+      axios
+        .get('https://lightbulbserver1819.herokuapp.com/answers')
+        .then(data => {
+          console.log(data.data)
+          let answers = data.data
+          commit('SET_ANSWERS', answers)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    set_new_user1(){
+
     },
     set_logged_user(context, payload) {
       context.commit("SET_LOGGED_USER", payload);

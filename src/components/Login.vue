@@ -15,12 +15,15 @@
         </b-form>
       </b-col>
     </b-row>
+    
+  <p v-for="(item, index) in users" :key="index">{{index.email}}</p>
   </b-container>
 </template>
 
 
 <script>
 import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "login",
@@ -32,6 +35,12 @@ export default {
         password: ""
       }
     };
+  },
+  mounted(){    
+    this.$store.dispatch("loadUsers");
+    this.$store.dispatch("loadCourses");
+    this.$store.dispatch("loadQuestions");
+    this.$store.dispatch("loadAnswers");
   },
   methods: {
     login() {
@@ -64,7 +73,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["checkLogin"])
+    ...mapGetters(["checkLogin"]),
+    ...mapState(["users", "courses", "questions", "answers"])
   }
 };
 </script>

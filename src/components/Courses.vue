@@ -105,7 +105,7 @@ export default {
         }
       }
 
-      const tempCourses = await axios.get('/link/', config);
+      const tempCourses = await axios.get('https://lightbulbserver1819.herokuapp.com/courses', config);
       this.tempCourses = tempCourses.data.courses
       
       /*this.tempCourses = []

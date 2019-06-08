@@ -1,7 +1,7 @@
 const User = require("../models/user.model.js");
 const jsonMessages = require("../jsonMessages/db.js");
 const bcrypt = require("bcrypt");
-
+/*
 
 async function login(req, res) {
     const username = ??????? ;
@@ -19,4 +19,4 @@ async function login(req, res) {
     else {
         error = "O utilizador inserido não existe!";
     }
-}
+}*/

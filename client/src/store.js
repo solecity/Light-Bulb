@@ -333,7 +333,7 @@ export default new Vuex.Store({
   actions: {
     loadUsers({ commit }) {
       axios
-        .get('https://lightbulbserver1819.herokuapp.com/users')
+        .get('https://lightbulbserver1819.herokuapp.com/user')
         .then(data => {
           console.log(data.data)
           let users = data.data
@@ -345,7 +345,7 @@ export default new Vuex.Store({
     },
     loadCourses({ commit }) {
       axios
-        .get('https://lightbulbserver1819.herokuapp.com/courses')
+        .get('https://lightbulbserver1819.herokuapp.com/course')
         .then(data => {
           console.log(data.data)
           let courses = data.data
@@ -357,7 +357,7 @@ export default new Vuex.Store({
     },
     loadQuestions({ commit }) {
       axios
-        .get('https://lightbulbserver1819.herokuapp.com/questions')
+        .get('https://lightbulbserver1819.herokuapp.com/question')
         .then(data => {
           console.log(data.data)
           let questions = data.data
@@ -369,7 +369,7 @@ export default new Vuex.Store({
     },
     loadAnswers({ commit }) {
       axios
-        .get('https://lightbulbserver1819.herokuapp.com/answers')
+        .get('https://lightbulbserver1819.herokuapp.com/answer')
         .then(data => {
           console.log(data.data)
           let answers = data.data

@@ -32,7 +32,11 @@
           <b-row>
             <b-col md="1" class="questionDetails">
               <b-button id="followBtn" @click="follow(question.id)">
-                <i class="fa fa-heart" :style="checkUserFollower(getFollowersByQuestionId(question.id)) ? 'color: rgb(255, 111, 135) !important;' : ''" style="color: white !important;"></i>
+                <i
+                  class="fa fa-heart"
+                  :style="checkUserFollower(getFollowersByQuestionId(question.id)) ? 'color: rgb(255, 111, 135) !important;' : ''"
+                  style="color: white !important;"
+                ></i>
               </b-button>
             </b-col>
             <b-col>
@@ -85,6 +89,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "catalog",
@@ -102,7 +107,7 @@ export default {
       questionStatus: "",
 
       /********/
-      tempLoggedId: 0,
+      tempLoggedId: 0
     };
   },
   created() {
@@ -116,13 +121,20 @@ export default {
       JSON.parse(localStorage.getItem("loggedUser"))
     );
   },
+  mounted() {
+    
+    this.$store.dispatch("loadUsers");
+    this.$store.dispatch("loadCourses");
+    this.$store.dispatch("loadQuestions");
+    this.$store.dispatch("loadAnswers");
+  },
   methods: {
     follow(questionId) {
       let newFollower = {
         user: this.tempLoggedId,
         question: questionId
       };
-      console.log(newFollower)
+      console.log(newFollower);
       this.$store.dispatch("edit_question_follower", newFollower);
     },
     checkUserFollower(followers) {
@@ -131,7 +143,7 @@ export default {
           return true;
         } else {
           return false;
-        }        
+        }
       }
     }
   },
@@ -143,6 +155,7 @@ export default {
       "getQuestionsByStatus",
       "getFollowersByQuestionId"
     ]),
+    ...mapState(["users", "courses", "questions", "answers"]),
     showQuestions() {
       if (this.lockedClicked) {
         this.unlockedClicked = false;
@@ -219,7 +232,10 @@ function orderQuestionsByAnswers(a, b) {
 
 
 <style>
-.catalog h2, .catalog h5, .catalog p, .catalog .fa {
+.catalog h2,
+.catalog h5,
+.catalog p,
+.catalog .fa {
   color: black;
 }
 

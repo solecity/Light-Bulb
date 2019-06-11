@@ -28,7 +28,7 @@
 
       <!-- QUESTIONS -->
       <b-row class="subrow">
-        <b-col md="12" v-for="question in showQuestions" :key="question.id" class="question">
+        <b-col md="12" v-for="question in questions" :key="question.id" class="question">
           <b-row>
             <b-col md="1" class="questionDetails">
               <b-button id="followBtn" @click="follow(question.id)">

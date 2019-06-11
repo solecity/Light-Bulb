@@ -435,6 +435,9 @@ export default new Vuex.Store({
        let tempUnits
      },*/
     checkLogin: state => login => {
+      
+
+
       let error = "";
       if (state.users.find(user => user.email === login.email) != null) {
         if (state.users.find(user => user.email === login.email).password != login.password) {

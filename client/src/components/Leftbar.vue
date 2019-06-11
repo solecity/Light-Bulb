@@ -7,7 +7,7 @@
       <li>
         <router-link :to="{ name: 'courses' }" :class="{ 'nav-link': true }">Unidades Pedagógicas</router-link>
         <ul id="signInUnits" class="list-unstyled">
-          <li v-for="unit in courseUnits" :key="unit.id">{{ unit.unit }}</li>
+          <li v-for="unit in courseUnits" :key="unit._id">{{ unit.unit }}</li>
         </ul>
       </li>
     </ul>
@@ -72,9 +72,9 @@ export default {
 
       for (let i = 0; i < this.courseUnits.length; i++) {
         let tempUnit = {
-          id: this.courseUnits[i].id,
+          id: this.courseUnits[i]._id,
           name: this.courseUnits[i].unit,
-          courseId: this.getCourseByUnitId(this.courseUnits[i].id)
+          courseId: this.getCourseByUnitId(this.courseUnits[i]._id)
         }
         tempUserUnits.push(tempUnit);
       }

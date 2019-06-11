@@ -304,7 +304,7 @@ export default new Vuex.Store({
     },
     EDIT_QUESTION_FOLLOWER(state, payload) {
       for (let i = 0; i < state.questions.length; i++) {
-        if (state.questions[i].id == payload.question) {
+        if (state.questions[i]._id == payload.question) {
           state.questions[i].followers.push(payload.user);
         }
       }

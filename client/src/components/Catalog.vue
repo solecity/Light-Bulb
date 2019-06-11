@@ -28,33 +28,33 @@
 
       <!-- QUESTIONS -->
       <b-row class="subrow">
-        <b-col md="12" v-for="question in questions" :key="question.id" class="question">
+        <b-col md="12" v-for="question in questions" :key="question._id" class="question">
           <b-row>
             <b-col md="1" class="questionDetails">
-              <b-button id="followBtn" @click="follow(question.id)">
+              <b-button id="followBtn" @click="follow(question._id)">
                 <i
                   class="fa fa-heart"
-                  :style="checkUserFollower(getFollowersByQuestionId(question.id)) ? 'color: rgb(255, 111, 135) !important;' : ''"
+                  :style="checkUserFollower(getFollowersByQuestionId(question._id)) ? 'color: rgb(255, 111, 135) !important;' : ''"
                   style="color: white !important;"
                 ></i>
               </b-button>
             </b-col>
             <b-col>
-              <router-link :to="{ name: 'question', params: { id: question.id } }">
+              <router-link :to="{ name: 'question', params: { id: question._id } }">
                 <b-row>
                   <b-col md="8" class="text-left questionDetails">
                     <h5>{{ question.title }}</h5>
                   </b-col>
                   <b-col md="3" class="text-left questionDetails">
                     <i class="fa fa-long-arrow-alt-up"></i>
-                    <p>&nbsp;{{ question.upvote }}</p>
+                    <p>&nbsp;{{ question.upvotes.length }}</p>
                     <i class="fa fa-long-arrow-alt-down"></i>
-                    <p>&nbsp;{{ question.downvote }}</p>
+                    <p>&nbsp;{{ question.downvotes.length }}</p>
                     <i class="fa fa-eye"></i>
                     <p>&nbsp;{{ question.view }}</p>
                   </b-col>
                   <b-col md="1" class="text-left questionDetails">
-                    <i v-if="question.status === 'locked'" class="fa fa-lock" aria-hidden="true"></i>
+                    <i v-if="question.locked === true" class="fa fa-lock" aria-hidden="true"></i>
                     <i v-else class="fa fa-unlock" aria-hidden="true"></i>
                   </b-col>
                 </b-row>

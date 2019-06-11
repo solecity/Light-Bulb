@@ -13,9 +13,12 @@ export default {
     this.$store.dispatch("loadCourses");
     this.$store.dispatch("loadQuestions");
     this.$store.dispatch("loadUnits");
+    this.$store.dispatch("loadTags");
+    this.$store.dispatch("loadMedals");
+    this.$store.dispatch("loadLevels");
   },
   computed: {
-    ...mapState(["users", "courses", "questions", "courseUnits"])
+    ...mapState(["users", "courses", "questions", "courseUnits", "tags", "medals", "levels"])
   }
 };
 </script>

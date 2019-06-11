@@ -489,7 +489,7 @@ export default new Vuex.Store({
     checkUserRegister: state => register => {
       let error = "";
       if (state.users.find(user => user.email === register.email) == null) {
-        state.loggedUser = register.id;
+        state.loggedUser = register._id;
 
         /*********/
         localStorage.setItem("loggedUser", state.loggedUser);
@@ -501,20 +501,20 @@ export default new Vuex.Store({
     getUserLastId: state => {
       let lastId = 0;
       if (state.users.length > 0) {
-        lastId = state.users[state.users.length - 1].id + 1;
+        lastId = state.users[state.users.length - 1]._id + 1;
       }
       return lastId;
     },
     getUserById: state => id => {
-      return state.users.find(user => user.id === id);
+      return state.users.find(user => user._id === id);
     },
     getUserId: state => login => {
-      return state.users.find(user => user.email === login.email).id;
+      return state.users.find(user => user.email === login.email)._id;
     },
     getUnitsByUserId: state => id => {
       let tempArray = [];
       for (let i = 0; i < state.users.length; i++) {
-        if (state.users[i].id == id) {
+        if (state.users[i]._id == id) {
           tempArray = state.users[i].units;
         }
       }
@@ -523,14 +523,14 @@ export default new Vuex.Store({
     getQuestionsByUserId: state => id => {
       let tempArray = [];
       for (let i = 0; i < state.questions.length; i++) {
-        if (state.questions[i].userId == id) {
+        if (state.questions[i].user == id) {
           tempArray.push(state.questions[i]);
         }
       }
       return [...new Set(tempArray)];
     },
     getQuestionById: state => id => {
-      return state.questions.find(question => question.id == id);
+      return state.questions.find(question => question._id == id);
     },
     getQuestionsByStatus: state => status => {
       let tempArray = [];
@@ -543,7 +543,7 @@ export default new Vuex.Store({
     },
     getFollowersByQuestionId: state => id => {
       for (let i = 0; i < state.questions.length; i++) {
-        if (state.questions[i].id === id) {
+        if (state.questions[i]._id === id) {
           return state.questions[i].followers;
         }
       }
@@ -551,7 +551,7 @@ export default new Vuex.Store({
     getAnswersByQuestionId: state => id => {
       let tempArray = [];
       for (let i = 0; i < state.questions.length; i++) {
-        if (state.questions[i].id == id) {
+        if (state.questions[i]._id == id) {
           tempArray = state.questions[i].answers;
         }
       }
@@ -560,9 +560,9 @@ export default new Vuex.Store({
     getUnitByCourseId: state => (courseId, unitId) => {
       let tempUnit = "";
       for (let i = 0; i < state.courses.length; i++) {
-        if (state.courses[i].id == courseId) {
+        if (state.courses[i]._id == courseId) {
           for (let j = 0; j < state.courses[i].courseUnit.length; j++) {
-            if (state.courses[i].courseUnit[j].id == unitId) {
+            if (state.courses[i].courseUnit[j]._id == unitId) {
               tempUnit = state.courses[i].courseUnit[j].unit;
             }
           }
@@ -577,7 +577,7 @@ export default new Vuex.Store({
       let cont;
       for (let i = 0; i < state.courses.length; i++) {
         //tempCourseUnits = state.courses[i].courseUnit
-        if (state.courses[i].id == id) {
+        if (state.courses[i]._id == id) {
           tempUnits = state.courses[i].courseUnit;
         }
       }
@@ -587,8 +587,8 @@ export default new Vuex.Store({
 
       for (let i = 0; i < state.courseUnits.length; i++) {
         for (let j = 0; j < tempUnits.length; j++) {
-          console.log("k: " + state.courseUnits[i].id)
-          if (tempUnits[j] == state.courseUnits[i].id && tempUnits[j] == state.courseUnits[i].id) {
+          console.log("k: " + state.courseUnits[i]._id)
+          if (tempUnits[j] == state.courseUnits[i]._id && tempUnits[j] == state.courseUnits[i]._id) {
             tempUnits2.push(state.courseUnits[i])
             console.log("aaa")
           }
@@ -598,18 +598,18 @@ export default new Vuex.Store({
       return tempUnits2;
     },
     getLevelById: state => id => {
-      return state.levels.find(level => level.id == id);
+      return state.levels.find(level => level._id == id);
     },
     getMedalById: state => id => {
-      return state.medals.find(medal => medal.id == id);
+      return state.medals.find(medal => medal._id == id);
     },
     checkUserUnitsById: state => newUnit => {
       let error = "";
 
       for (let i = 0; i < state.users.length; i++) {
-        if (state.users[i].id == newUnit.userId) {
-          for (let j = 0; j < state.users[i].units.length; j++) {
-            if (state.users[i].units[j].unitId == newUnit.unitId && state.users[i].units[j].courseId == newUnit.courseId) {
+        if (state.users[i]._id == newUnit.userId) {
+          for (let j = 0; j < state.users[i].subscriptions.length; j++) {
+            if (state.users[i].subscriptions[j] == newUnit && state.users[i].subscriptions[j] == newUnit) {
               error = "Já está inscrita";
             }
           }

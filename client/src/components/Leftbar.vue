@@ -7,7 +7,7 @@
       <li>
         <router-link :to="{ name: 'courses' }" :class="{ 'nav-link': true }">Unidades Pedagógicas</router-link>
         <ul id="signInUnits" class="list-unstyled">
-          <li v-for="unit in userUnits" :key="unit.id">{{ unit.name }}</li>
+          <li v-for="unit in courseUnits" :key="unit.id">{{ unit.unit }}</li>
         </ul>
       </li>
     </ul>
@@ -17,6 +17,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "courses",
@@ -39,12 +40,19 @@ export default {
       JSON.parse(localStorage.getItem("loggedUser"))
     );
   },
+  mounted() {
+    
+    this.$store.dispatch("loadUsers");
+    this.$store.dispatch("loadCourses");
+    this.$store.dispatch("loadQuestions");
+    this.$store.dispatch("loadUnits");
+  },
   methods: {
 
     getCourseByUnitId(unitId) {
       let tempUnitIds = []
-      for (let i = 0; i < this.tempCourses.length; i++) {
-        if (unitId == this.tempCourses[i].courseUnit[this.tempCourses[i].courseUnit.length]) {
+      for (let i = 0; i < this.courses.length; i++) {
+        if (unitId == this.courses[i].units[this.courses[i].units.length]) {
           tempUnitIds.push(unitId)
         }
 
@@ -56,16 +64,17 @@ export default {
   },
   computed: {
     ...mapGetters(["getUsers", "getCourses", "getUnitsByUserId", "getUnitByCourseId"]),
+    ...mapState(["users", "courses", "questions", "courseUnits"]),
 
     userUnits() {
       this.tempIds = this.getUnitsByUserId(this.tempLoggedId);
       let tempUserUnits = []
 
-      for (let i = 0; i < this.tempCourseUnits.length; i++) {
+      for (let i = 0; i < this.courseUnits.length; i++) {
         let tempUnit = {
-          id: this.tempCourseUnits[i].id,
-          name: this.tempCourseUnits[i].unit,
-          courseId: this.getCourseByUnitId(this.tempCourseUnits[i].id)
+          id: this.courseUnits[i].id,
+          name: this.courseUnits[i].unit,
+          courseId: this.getCourseByUnitId(this.courseUnits[i].id)
         }
         tempUserUnits.push(tempUnit);
       }

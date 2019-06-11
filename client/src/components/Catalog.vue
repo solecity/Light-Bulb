@@ -47,9 +47,9 @@
                   </b-col>
                   <b-col md="3" class="text-left questionDetails">
                     <i class="fa fa-long-arrow-alt-up"></i>
-                    <p>&nbsp;{{ question.upvote.length }}</p>
+                    <p>&nbsp;{{ question.upvote }}</p>
                     <i class="fa fa-long-arrow-alt-down"></i>
-                    <p>&nbsp;{{ question.downvote.length }}</p>
+                    <p>&nbsp;{{ question.downvote }}</p>
                     <i class="fa fa-eye"></i>
                     <p>&nbsp;{{ question.view }}</p>
                   </b-col>

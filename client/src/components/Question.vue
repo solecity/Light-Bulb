@@ -214,6 +214,9 @@ export default {
     this.$store.dispatch("loadCourses");
     this.$store.dispatch("loadQuestions");
     this.$store.dispatch("loadUnits");
+    this.$store.dispatch("loadMedals");
+    this.$store.dispatch("loadLevels");
+    this.$store.dispatch("loadTags");
   },
   methods: {
     ...mapActions(["edit_question_status"]),
@@ -295,7 +298,7 @@ export default {
       "getAnswersByQuestionId",
       "getLevelById"
     ]),
-    ...mapState(["users", "courses", "questions", "courseUnits"]),
+    ...mapState(["users", "courses", "questions", "courseUnits", "medals", "levels", "tags"]),
   }
 };
 </script>

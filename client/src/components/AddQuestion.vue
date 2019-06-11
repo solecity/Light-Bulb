@@ -74,6 +74,7 @@
 
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "addQuestion",
   data: function() {
@@ -102,6 +103,14 @@ export default {
     this.tempLoggedId = parseInt(
       JSON.parse(localStorage.getItem("loggedUser"))
     );
+  },  
+  mounted(){    
+    this.$store.dispatch("loadUsers");
+    this.$store.dispatch("loadCourses");
+    this.$store.dispatch("loadQuestions");
+    this.$store.dispatch("loadAnswers");
+    this.$store.dispatch("loadUnits");
+    this.$store.dispatch("loadTags");
   },
   methods: {
     checkQuestion(fields) {
@@ -189,7 +198,8 @@ export default {
     },
     tags() {
       return this.$store.getters.tags;
-    }
+    },
+    ...mapState(["users", "courses", "questions", "answers", "courseUnits", "tags"])
   }
 };
 </script>

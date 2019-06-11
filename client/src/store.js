@@ -331,6 +331,9 @@ export default new Vuex.Store({
     },
     SET_UNITS(state, units) {
       state.courseUnits = units
+    },
+    SET_TAGS(state, tags) {
+      state.tags = tags
     }
   },
   actions: {
@@ -389,6 +392,18 @@ export default new Vuex.Store({
           console.log("units: " + data.data)
           let units = data.data
           commit('SET_UNITS', units)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    loadTags({ commit }) {
+      axios
+        .get('https://lightbulbserver1819.herokuapp.com/tag')
+        .then(data => {
+          console.log("tags: " + data.data)
+          let tags = data.data
+          commit('SET_TAGS', tags)
         })
         .catch(error => {
           console.log(error)

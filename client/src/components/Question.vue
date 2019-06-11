@@ -4,10 +4,10 @@
       <!-- QUESTION TITLE -->
       <b-row class="subrow questionInfo">
         <h2>{{ question.title }}</h2>
-        <div id="lock" v-if="question.userId == tempLoggedId">
-          <div v-if="question.status == 'unlocked'">
+        <div id="lock" v-if="question.user == tempLoggedId">
+          <div v-if="question.locked == false">
             <b-button class="btn">
-              <i @click="edit_question_status(question.id)" class="fa fa-unlock" aria-hidden="true"></i>
+              <i @click="edit_question_status(question._id)" class="fa fa-unlock" aria-hidden="true"></i>
             </b-button>
           </div>
           <div v-if="question.status == 'locked'">
@@ -29,19 +29,19 @@
                 <b-button class="upBtn" @click="upvote(question.id)">
                   <i
                     class="fa fa-angle-up fa-lg"
-                    :style="checkVote(question.upvote) ? 'color: rgb(29, 175, 102) !important;' : 'color: rgb(177, 177, 177) !important;'"
+                    :style="checkVote(question.upvotes) ? 'color: rgb(29, 175, 102) !important;' : 'color: rgb(177, 177, 177) !important;'"
                   ></i>
                 </b-button>
-                <p>{{ question.upvote.length }}</p>
+                <p>{{ question.upvotes.length }}</p>
               </b-row>
               <b-row class="voteBtn">
                 <b-button class="downBtn" @click="downvote(question.id)">
                   <i
                     class="fa fa-angle-down fa-lg"
-                    :style="checkVote(question.downvote) ? 'color: rgb(187, 5, 5) !important;' : 'color: rgb(177, 177, 177) !important;'"
+                    :style="checkVote(question.downvotes) ? 'color: rgb(187, 5, 5) !important;' : 'color: rgb(177, 177, 177) !important;'"
                   ></i>
                 </b-button>
-                <p>{{ question.downvote.length }}</p>
+                <p>{{ question.downvotes.length }}</p>
               </b-row>
               <b-row class="followBtn">
                 <b-button class="likeBtn">
@@ -81,18 +81,18 @@
 
       <!-- ANSWERS AMOUNT -->
       <b-row id="answersTab" class="subrow rowsInfo">
-        <h5>{{answers.length}} Respostas</h5>
+        <h5>{{questions.answers.length}} Respostas</h5>
       </b-row>
 
       <!-- DIVISION BAR -->
       <b-row
         id="divisionBarQuestion"
         class="yellow"
-        :style="answers.length == 0 ? 'margin: 200px;' : ''"
+        :style="questions.answers.length == 0 ? 'margin: 200px;' : ''"
       ></b-row>
 
       <!-- ANSWERS LIST -->
-      <b-row v-for="answer in answers" :key="answer.id" class="subrow rowsInfo">
+      <b-row v-for="answer in questions.answers" :key="answer._id" class="subrow rowsInfo">
         <b-col md="12">
           <!-- ANSWER VOTES -->
           <b-row>
@@ -101,20 +101,20 @@
                 <b-button class="upBtn">
                   <i class="fa fa-angle-up fa-lg"></i>
                 </b-button>
-                <p>{{answer.upvote}}</p>
+                <p>{{answer.upvotes}}</p>
               </b-row>
               <b-row class="voteBtn">
                 <b-button class="downBtn">
                   <i class="fa fa-angle-down fa-lg"></i>
                 </b-button>
-                <p>{{answer.downvote}}</p>
+                <p>{{answer.downvotes}}</p>
               </b-row>
             </b-col>
 
             <b-col md="11">
               <!-- ANSWER CONTENT -->
               <b-row class="content">
-                <p>{{ answer.answer }}</p>
+                <p>{{ answer.description }}</p>
               </b-row>
               <b-row class="d-flex flex-row-reverse">
                 <!-- USER DATA -->
@@ -126,11 +126,11 @@
                   </b-row>-->
                   <b-row>
                     <b-col md="4" class="mt-3">
-                      <img :src="getUserById(answer.userId).profilePic" alt="pic.png">
+                      <img :src="getUserById(answer.user).profilePic" alt="pic.png">
                     </b-col>
                     <b-col md="8" class="mt-2">
-                      <p>{{ getUserById(answer.userId).name }}</p>
-                      <p>Lvl {{ getLevelById(getUserById(answer.userId).gameElements.level).id }} - {{ getLevelById(getUserById(answer.userId).gameElements.level).label }}</p>
+                      <p>{{ getUserById(answer.user).name }}</p>
+                      <p>Lvl {{ getLevelById(getUserById(answer.user).gameElements.level)._id }} - {{ getLevelById(getUserById(answer.user).gameElements.level).label }}</p>
                     </b-col>
                   </b-row>
                 </b-col>
@@ -174,7 +174,9 @@
 
 
 <script>
+//'5cfa466e4e08b34490da46df'
 import { mapGetters, mapActions } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "question",
@@ -195,7 +197,7 @@ export default {
   },
   created() {
     this.loggedUser = this.$store.state.loggedUser;
-    this.tempQuestionId = this.$route.params.id;
+    this.tempQuestionId = this.$route.params._id;
 
     /********/
     this.tempLoggedId = parseInt(
@@ -206,6 +208,13 @@ export default {
     this.question = this.getQuestionById(this.tempQuestionId);
     this.questionUser = this.getUserById(this.question.userId);
   },
+  mounted() {
+    
+    this.$store.dispatch("loadUsers");
+    this.$store.dispatch("loadCourses");
+    this.$store.dispatch("loadQuestions");
+    this.$store.dispatch("loadUnits");
+  },
   methods: {
     ...mapActions(["edit_question_status"]),
     upvote(question) {
@@ -213,7 +222,7 @@ export default {
         question: question,
         user: this.tempLoggedId
       };
-      if (!this.checkVote(this.question.upvote)) {
+      if (!this.checkVote(this.question.upvotes)) {
         this.$store.dispatch("edit_question_upvote", tempParams);
       }
     },
@@ -222,7 +231,7 @@ export default {
         question: question,
         user: this.tempLoggedId
       };
-      if (!this.checkVote(this.question.downvote)) {
+      if (!this.checkVote(this.question.downvotes)) {
         this.$store.dispatch("edit_question_downvote", tempParams);
       }
     },
@@ -257,11 +266,11 @@ export default {
     addAnswer() {
       let newAnswer = {
         id: this.getAnswerLastId(this.tempQuestionId),
-        userId: this.loggedUser,
+        user: this.loggedUser,
         date: this.$store.getters.getTodaysDate,
-        answer: this.form.newAnswer,
-        upvote: 0,
-        downvote: 0
+        description: this.form.newAnswer,
+        upvotes: [],
+        downvotes: []
       };
       let tempParams = {
         newAnswer: newAnswer,
@@ -285,7 +294,8 @@ export default {
       "getUserById",
       "getAnswersByQuestionId",
       "getLevelById"
-    ])
+    ]),
+    ...mapState(["users", "courses", "questions", "courseUnits"]),
   }
 };
 </script>

@@ -16,6 +16,7 @@
 
 
 <script>
+//userUnits(users, courseUnits)
 import { mapGetters } from "vuex";
 import { mapState } from "vuex";
 

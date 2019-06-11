@@ -257,7 +257,7 @@ export default new Vuex.Store({
     },
     SET_ANSWER(state, payload) {
       for (let i = 0; i < state.questions.length; i++) {
-        if (state.questions[i].id == payload.questionId) {
+        if (state.questions[i]._id == payload.questionId) {
           state.questions[i].answers.push(payload.newAnswer);
         }
       }

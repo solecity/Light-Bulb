@@ -206,7 +206,7 @@ export default {
 
     this.answers = this.getAnswersByQuestionId(this.tempQuestionId);
     this.question = this.getQuestionById(this.tempQuestionId);
-    this.questionUser = this.getUserById(this.question.userId);
+    this.questionUser = this.getUserById(this.question.user);
   },
   mounted() {
     

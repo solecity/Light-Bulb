@@ -9,7 +9,7 @@
     <h6>Top utilizadores</h6>
     <table class="table">
       <tbody>
-        <tr v-for="(user, index) in topUsers" :key="user.id">
+        <tr v-for="(user, index) in showTopUsers(users, questions)" :key="user._id">
           <th scope="row">{{ index + 1 }}</th>
           <td>
             <img :src="user.profilePic" id="profilePic" alt="logo.png" height="40">
@@ -25,6 +25,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "rightbar",
@@ -41,6 +42,7 @@ export default {
   created() {
     this.loggedUser = this.$store.state.loggedUser;
     this.tempUsers = this.getUsers;
+    this.tempQuestions = this.getQuestions;
 
     /********/
     this.tempLoggedId = parseInt(
@@ -49,27 +51,39 @@ export default {
     
     this.showTopUsers();
   },
+  mounted() {
+    
+    this.$store.dispatch("loadUsers");
+    this.$store.dispatch("loadCourses");
+    this.$store.dispatch("loadQuestions");
+    this.$store.dispatch("loadUnits");
+  },
   methods: {
-    showTopUsers() {
-      let questions = this.getQuestions;
+    showTopUsers(users, questions) {
+     // let questions = this.questions;
       let tempArray = []
+      //console.log(this.users)
 
-      this.tempUsers.forEach(user => {
+      this.users.forEach(user => {
         let reputation = 0;
-        questions.forEach(question => {
-          if (question.userId === user.id) {
-            reputation += question.upvote.length;
-            reputation -= question.downvote.length;          
+        this.questions.forEach(question => {
+             // console.log("000")
+          if (question.user === user._id) {
+             // console.log("000")
+            reputation += question.upvotes.length;
+            reputation -= question.downvotes.length;          
             user.reputation = reputation;
             if(user.reputation >= 0) {
               tempArray.push(user);
+              //console.log("aaa")
             }
           }
         });
       });
-
+      console.log(tempArray)
       this.topUsers = [...new Set(tempArray)];
       this.topUsers.sort(this.sortByReputation);
+      return this.topUsers
     },
 
     sortByReputation(a, b) {
@@ -79,7 +93,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getUsers", "getQuestions", "getTopUsers"])
+    ...mapGetters(["getUsers", "getQuestions", "getTopUsers"]),
+    ...mapState(["users", "courses", "questions", "courseUnits"]),
   }
 };
 </script>

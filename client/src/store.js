@@ -334,6 +334,12 @@ export default new Vuex.Store({
     },
     SET_TAGS(state, tags) {
       state.tags = tags
+    },
+    SET_MEDALS(state, medals) {
+      state.medals = medals
+    },
+    SET_LEVELS(state, levels) {
+      state.levels = levels
     }
   },
   actions: {
@@ -404,6 +410,30 @@ export default new Vuex.Store({
           console.log("tags: " + data.data)
           let tags = data.data
           commit('SET_TAGS', tags)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    loadMedals({ commit }) {
+      axios
+        .get('https://lightbulbserver1819.herokuapp.com/medal')
+        .then(data => {
+          console.log("medals: " + data.data)
+          let medals = data.data
+          commit('SET_MEDALS', medals)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    loadLevels({ commit }) {
+      axios
+        .get('https://lightbulbserver1819.herokuapp.com/level')
+        .then(data => {
+          console.log("levels: " + data.data)
+          let levels = data.data
+          commit('SET_LEVELS', levels)
         })
         .catch(error => {
           console.log(error)

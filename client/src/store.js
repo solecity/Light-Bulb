@@ -621,7 +621,7 @@ export default new Vuex.Store({
       let tempArray = [];
       for (let i = 0; i < state.courses.length; i++) {
         let tempCourse = {
-          id: state.courses[i].id,
+          id: state.courses[i]._id,
           course: state.courses[i].course
         };
         tempArray.push(tempCourse);
@@ -633,7 +633,7 @@ export default new Vuex.Store({
       let tempArray = [];
       for (let i = 0; i < state.courseUnits.length; i++) {
         let tempUnit = {
-          id: state.courseUnits[i].id,
+          id: state.courseUnits[i]._id,
           unit: state.courseUnits[i].unit
         };
         tempArray.push(tempUnit);

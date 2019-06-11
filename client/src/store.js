@@ -338,7 +338,7 @@ export default new Vuex.Store({
       axios
         .get('https://lightbulbserver1819.herokuapp.com/user')
         .then(data => {
-          console.log(data.data)
+          console.log("users: " + data.data)
           let users = data.data
           commit('SET_USERS', users)
         })
@@ -350,7 +350,7 @@ export default new Vuex.Store({
       axios
         .get('https://lightbulbserver1819.herokuapp.com/course')
         .then(data => {
-          console.log(data.data)
+          console.log("courses: " + data.data)
           let courses = data.data
           commit('SET_COURSES', courses)
         })
@@ -362,7 +362,7 @@ export default new Vuex.Store({
       axios
         .get('https://lightbulbserver1819.herokuapp.com/question')
         .then(data => {
-          console.log(data.data)
+          console.log("questions: " + data.data)
           let questions = data.data
           commit('SET_QUESTIONS', questions)
         })
@@ -372,9 +372,9 @@ export default new Vuex.Store({
     },
     loadAnswers({ commit }) {
       axios
-        .get('https://lightbulbserver1819.herokuapp.com/answer')
+        .get('https://lightbulbserver1819.herokuapp.com/question/answer')
         .then(data => {
-          console.log(data.data)
+          console.log("answers: " + data.data)
           let answers = data.data
           commit('SET_ANSWERS', answers)
         })
@@ -386,7 +386,7 @@ export default new Vuex.Store({
       axios
         .get('https://lightbulbserver1819.herokuapp.com/unit')
         .then(data => {
-          console.log(data.data)
+          console.log("units: " + data.data)
           let units = data.data
           commit('SET_UNITS', units)
         })

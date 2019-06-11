@@ -41,6 +41,7 @@ export default {
     this.$store.dispatch("loadCourses");
     this.$store.dispatch("loadQuestions");
     this.$store.dispatch("loadAnswers");
+    this.$store.dispatch("loadUnits");
   },
   methods: {
     login() {
@@ -74,7 +75,7 @@ export default {
   },
   computed: {
     ...mapGetters(["checkLogin"]),
-    ...mapState(["users", "courses", "questions", "answers"])
+    ...mapState(["users", "courses", "questions", "answers", "courseUnits"])
   }
 };
 </script>

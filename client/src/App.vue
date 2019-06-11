@@ -12,10 +12,10 @@ export default {
     this.$store.dispatch("loadUsers");
     this.$store.dispatch("loadCourses");
     this.$store.dispatch("loadQuestions");
-    this.$store.dispatch("loadAnswers");
+    this.$store.dispatch("loadUnits");
   },
   computed: {
-    ...mapState(["users", "courses", "questions", "answers"])
+    ...mapState(["users", "courses", "questions", "courseUnits"])
   }
 };
 </script>

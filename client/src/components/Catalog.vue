@@ -126,7 +126,7 @@ export default {
     this.$store.dispatch("loadUsers");
     this.$store.dispatch("loadCourses");
     this.$store.dispatch("loadQuestions");
-    this.$store.dispatch("loadAnswers");
+    this.$store.dispatch("loadUnits");
   },
   methods: {
     follow(questionId) {
@@ -155,7 +155,7 @@ export default {
       "getQuestionsByStatus",
       "getFollowersByQuestionId"
     ]),
-    ...mapState(["users", "courses", "questions", "answers"]),
+    ...mapState(["users", "courses", "questions", "courseUnits"]),
     showQuestions() {
       if (this.lockedClicked) {
         this.unlockedClicked = false;

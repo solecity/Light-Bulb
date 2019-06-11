@@ -10,7 +10,7 @@
               <i @click="edit_question_status(question._id)" class="fa fa-unlock" aria-hidden="true"></i>
             </b-button>
           </div>
-          <div v-if="question.status == 'locked'">
+          <div v-if="question.locked == true">
             <i class="fa fa-lock" aria-hidden="true"></i>
           </div>
         </div>

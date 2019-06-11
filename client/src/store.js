@@ -371,7 +371,7 @@ export default new Vuex.Store({
       axios
         .get('https://lightbulbserver1819.herokuapp.com/question')
         .then(data => {
-          console.log("questions: " + data.data)
+          console.log(data.data)
           let questions = data.data
           commit('SET_QUESTIONS', questions)
         })
@@ -560,6 +560,7 @@ export default new Vuex.Store({
       return [...new Set(tempArray)];
     },
     getQuestionById: state => id => {
+      console.log("oal",state.questions)
       return state.questions.find(question => question._id == id);
     },
     getQuestionsByStatus: state => status => {

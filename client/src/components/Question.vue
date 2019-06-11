@@ -1,13 +1,17 @@
 <template>
   <b-container fluid>
-    <div class="middle questionPage">
+    <div v-if="question" class="middle questionPage">
       <!-- QUESTION TITLE -->
       <b-row class="subrow questionInfo">
         <h2>{{ question.title }}</h2>
-        <div id="lock" v-if="question.user == '5cfa466e4e08b34490da46df'">
+        <div id="lock" v-if="question.user == tempLoggedId">
           <div v-if="question.locked == false">
             <b-button class="btn">
-              <i @click="edit_question_status(question._id)" class="fa fa-unlock" aria-hidden="true"></i>
+              <i
+                @click="edit_question_status(question._id)"
+                class="fa fa-unlock"
+                aria-hidden="true"
+              ></i>
             </b-button>
           </div>
           <div v-if="question.locked == true">
@@ -81,18 +85,18 @@
 
       <!-- ANSWERS AMOUNT -->
       <b-row id="answersTab" class="subrow rowsInfo">
-        <h5>{{questions.answers.length}} Respostas</h5>
+        <h5>{{question.answers.length}} Respostas</h5>
       </b-row>
 
       <!-- DIVISION BAR -->
       <b-row
         id="divisionBarQuestion"
         class="yellow"
-        :style="questions.answers.length == 0 ? 'margin: 200px;' : ''"
+        :style="question.answers.length == 0 ? 'margin: 200px;' : ''"
       ></b-row>
 
       <!-- ANSWERS LIST -->
-      <b-row v-for="answer in questions.answers" :key="answer._id" class="subrow rowsInfo">
+      <b-row v-for="answer in question.answers" :key="answer._id" class="subrow rowsInfo">
         <b-col md="12">
           <!-- ANSWER VOTES -->
           <b-row>
@@ -124,7 +128,7 @@
                     <p>XXXX horas</p>
                   </b-col>
                   </b-row>-->
-                  <b-row>
+                  <!-- <b-row>
                     <b-col md="4" class="mt-3">
                       <img :src="getUserById(answer.user).profilePic" alt="pic.png">
                     </b-col>
@@ -132,7 +136,7 @@
                       <p>{{ getUserById(answer.user).name }}</p>
                       <p>Lvl {{ getLevelById(getUserById(answer.user).gameElements.level)._id }} - {{ getLevelById(getUserById(answer.user).gameElements.level).label }}</p>
                     </b-col>
-                  </b-row>
+                  </b-row>-->
                 </b-col>
               </b-row>
             </b-col>
@@ -184,7 +188,7 @@ export default {
   data: function() {
     return {
       loggedUser: 0,
-      question: {},
+      question: null,
       questionUser: {},
       answers: [],
       form: {
@@ -196,21 +200,29 @@ export default {
       tempLoggedId: 0
     };
   },
+  watch: {
+    // whenever question changes, this function will run
+    questions: function(newQuestion, oldQuestion) {
+      console.log("newQuestion");
+      console.log(newQuestion);
+      if (newQuestion.length > 0) {
+        this.answers = this.getAnswersByQuestionId(this.tempQuestionId);
+        this.question = this.getQuestionById(this.tempQuestionId);
+        this.questionUser = this.getUserById(this.question.user);
+      }
+    }
+  },
   created() {
     this.loggedUser = this.$store.state.loggedUser;
-    this.tempQuestionId = this.$route.params._id;
+    this.tempQuestionId = this.$route.params.id;
+    console.log(this.$route);
 
     /********/
     this.tempLoggedId = parseInt(
       JSON.parse(localStorage.getItem("loggedUser"))
     );
-
-    this.answers = this.getAnswersByQuestionId(this.tempQuestionId);
-    this.question = this.getQuestionById(this.tempQuestionId);
-    this.questionUser = this.getUserById(this.question.user);
   },
   mounted() {
-    
     this.$store.dispatch("loadUsers");
     this.$store.dispatch("loadCourses");
     this.$store.dispatch("loadQuestions");
@@ -299,7 +311,15 @@ export default {
       "getAnswersByQuestionId",
       "getLevelById"
     ]),
-    ...mapState(["users", "courses", "questions", "courseUnits", "medals", "levels", "tags"]),
+    ...mapState([
+      "users",
+      "courses",
+      "questions",
+      "courseUnits",
+      "medals",
+      "levels",
+      "tags"
+    ])
   }
 };
 </script>
@@ -310,7 +330,7 @@ export default {
 .questionPage h5,
 .questionPage p,
 .questionPage .fa {
-  color: white;
+  color: black;
 }
 
 .rowsInfo {

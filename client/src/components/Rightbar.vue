@@ -80,7 +80,7 @@ export default {
           }
         });
       });
-      console.log(tempArray)
+      //console.log(tempArray)
       this.topUsers = [...new Set(tempArray)];
       this.topUsers.sort(this.sortByReputation);
       return this.topUsers

@@ -607,7 +607,7 @@ export default new Vuex.Store({
       let error = "";
 
       for (let i = 0; i < state.users.length; i++) {
-        if (state.users[i]._id == newUnit.userId) {
+        if (state.users[i]._id == newUnit) {
           for (let j = 0; j < state.users[i].subscriptions.length; j++) {
             if (state.users[i].subscriptions[j] == newUnit && state.users[i].subscriptions[j] == newUnit) {
               error = "Já está inscrita";

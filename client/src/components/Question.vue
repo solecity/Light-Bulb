@@ -26,7 +26,7 @@
           <b-row>
             <b-col md="1" class="votes">
               <b-row class="voteBtn">
-                <b-button class="upBtn" @click="upvote(question.id)">
+                <b-button class="upBtn" @click="upvote(question._id)">
                   <i
                     class="fa fa-angle-up fa-lg"
                     :style="checkVote(question.upvotes) ? 'color: rgb(29, 175, 102) !important;' : 'color: rgb(177, 177, 177) !important;'"
@@ -35,7 +35,7 @@
                 <p>{{ question.upvotes.length }}</p>
               </b-row>
               <b-row class="voteBtn">
-                <b-button class="downBtn" @click="downvote(question.id)">
+                <b-button class="downBtn" @click="downvote(question._id)">
                   <i
                     class="fa fa-angle-down fa-lg"
                     :style="checkVote(question.downvotes) ? 'color: rgb(187, 5, 5) !important;' : 'color: rgb(177, 177, 177) !important;'"

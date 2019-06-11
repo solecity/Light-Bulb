@@ -328,6 +328,9 @@ export default new Vuex.Store({
     },
     SET_ANSWERS(state, answers) {
       state.answers = answers
+    },
+    SET_UNITS(state, units) {
+      state.courseUnits = units
     }
   },
   actions: {
@@ -374,6 +377,18 @@ export default new Vuex.Store({
           console.log(data.data)
           let answers = data.data
           commit('SET_ANSWERS', answers)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    loadUnits({ commit }) {
+      axios
+        .get('https://lightbulbserver1819.herokuapp.com/unit')
+        .then(data => {
+          console.log(data.data)
+          let units = data.data
+          commit('SET_UNITS', units)
         })
         .catch(error => {
           console.log(error)
@@ -435,7 +450,7 @@ export default new Vuex.Store({
        let tempUnits
      },*/
     checkLogin: state => login => {
-      
+
 
 
       let error = "";

@@ -473,7 +473,7 @@ export default new Vuex.Store({
         if (state.users.find(user => user.email === login.email).password != login.password) {
           error = "A password não está correta";
         } else {
-          state.loggedUser = state.users.find(user => user.email == login.email).id;
+          state.loggedUser = state.users.find(user => user.email == login.email)._id;
 
           /*********/
           localStorage.setItem("loggedUser", state.loggedUser);

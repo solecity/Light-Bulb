@@ -4,7 +4,7 @@
       <!-- QUESTION TITLE -->
       <b-row class="subrow questionInfo">
         <h2>{{ question.title }}</h2>
-        <div id="lock" v-if="question.user == tempLoggedId">
+        <div id="lock" v-if="question.user == '5cfa466e4e08b34490da46df'">
           <div v-if="question.locked == false">
             <b-button class="btn">
               <i @click="edit_question_status(question._id)" class="fa fa-unlock" aria-hidden="true"></i>

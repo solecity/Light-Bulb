@@ -110,6 +110,18 @@ export default {
       tempLoggedId: 0
     };
   },
+
+  /*watch: {
+    // whenever question changes, this function will run
+    questions: function(newQuestion, oldQuestion) {
+      console.log("newQuestion");
+      console.log(newQuestion);
+      if (newQuestion.length > 0) {
+        this.tempQuestions = this.getQuestions;
+        this.sortedQuestions = this.tempQuestions;
+      }
+    }
+  },*/
   created() {
     this.loggedUser = this.$store.state.loggedUser;
     //this.tempsortedQuestionsCourses = this.$store.getters.checkCourseLabel;
@@ -122,11 +134,13 @@ export default {
     );
   },
   mounted() {
-    
     this.$store.dispatch("loadUsers");
     this.$store.dispatch("loadCourses");
     this.$store.dispatch("loadQuestions");
     this.$store.dispatch("loadUnits");
+    this.$store.dispatch("loadTags");
+    this.$store.dispatch("loadMedals");
+    this.$store.dispatch("loadLevels");
   },
   methods: {
     follow(questionId) {
@@ -155,7 +169,7 @@ export default {
       "getQuestionsByStatus",
       "getFollowersByQuestionId"
     ]),
-    ...mapState(["users", "courses", "questions", "courseUnits"]),
+    ...mapState(["users", "courses", "questions", "courseUnits", "tags", "medals", "levels"]),
     showQuestions() {
       if (this.lockedClicked) {
         this.unlockedClicked = false;

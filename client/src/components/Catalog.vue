@@ -169,7 +169,15 @@ export default {
       "getQuestionsByStatus",
       "getFollowersByQuestionId"
     ]),
-    ...mapState(["users", "courses", "questions", "courseUnits", "tags", "medals", "levels"]),
+    ...mapState([
+      "users",
+      "courses",
+      "questions",
+      "courseUnits",
+      "tags",
+      "medals",
+      "levels"
+    ]),
     showQuestions() {
       if (this.lockedClicked) {
         this.unlockedClicked = false;

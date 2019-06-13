@@ -7,19 +7,19 @@
 
       <!-- COURSES -->
       <b-row class="subrow courseList">
-        <b-col md="12" v-for="course in getCourses" :key="course.id" class="course">
+        <b-col md="12" v-for="course in getCourses" :key="course._id" class="course">
           <b-row>
             <b-col md="12" id="courseTitle" class="text-left">
               <h5>{{ course.course }}</h5>
             </b-col>
           </b-row>
 
-          <b-row v-for="unit in getUnitsByCourseId(course.id)" :key="unit.id">
+          <b-row v-for="unit in getUnitsByCourseId(course._id)" :key="unit._id">
             <b-col md="8" id="signInUnit" class="text-left">
               <p>{{ unit.unit }}</p>
             </b-col>
             <b-col md="2" id="signInBtn">
-              <b-button @click="signIn(course.id, unit.id)" class="btn" type="button">Inscrever</b-button>
+              <b-button @click="signIn(course._id, unit._id)" class="btn" type="button">Inscrever</b-button>
             </b-col>
             <b-col md="1" id="infoBtn">
               <b-button v-b-modal.modal-1 class="btn" type="button">
@@ -27,7 +27,7 @@
               </b-button>
             </b-col>            
             <div v-for="courseUnit in course.courseUnit" :key="courseUnit">
-              <b-modal id="modal-1" title="Info" v-if="courseUnit == unit.id">
+              <b-modal id="modal-1" title="Info" v-if="courseUnit == unit._id">
                 <p class="my-4">{{unit.unit}}</p>
                 <br>
                 <p class="my-4">{{unit.year}}º Ano</p>
@@ -46,7 +46,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import axios from "axios";
+import { mapState } from "vuex";
 
 export default {
   name: "courses",
@@ -69,6 +69,15 @@ export default {
 
     
   },
+  mounted() {
+    this.$store.dispatch("loadUsers");
+    this.$store.dispatch("loadCourses");
+    this.$store.dispatch("loadQuestions");
+    this.$store.dispatch("loadUnits");
+    this.$store.dispatch("loadMedals");
+    this.$store.dispatch("loadLevels");
+    this.$store.dispatch("loadTags");
+  },
   methods: {
     unitValidation(newUnit) {
       let valid = false;
@@ -88,6 +97,7 @@ export default {
         courseId: courseId,
         userId: this.tempLoggedId
       };
+      console.log("newUnit:",newUnit)
 
       if (this.unitValidation(newUnit).valid) {
         this.$store.dispatch("set_new_unit", newUnit);
@@ -98,7 +108,7 @@ export default {
       }
     },
 
-    async getCourses() {
+    /*async getCourses() {
       let config = {
         headers: {
           'Accept': 'application/json'
@@ -113,8 +123,8 @@ export default {
       axios.get('https://teste-ginasio-diogof98.c9users.io/').then(res => {
         this.tempCourses = res.data
         console.log(res.data);
-      });*/
-    }
+      });
+    }*/
   },
   computed: {
     ...mapGetters([
@@ -123,6 +133,15 @@ export default {
       "getUnitsByCourseId",
       "checkUserUnitsById",
       "checkCourseLabel"
+    ]),
+    ...mapState([
+      "users",
+      "courses",
+      "questions",
+      "courseUnits",
+      "medals",
+      "levels",
+      "tags"
     ])
   }
 };

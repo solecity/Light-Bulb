@@ -24,7 +24,12 @@
         :fields="fields"
         :bordered="bordered"
         :outlined="outlined"
-      ></b-table>
+      >
+        <template slot="remover_tag" slot-scope="row">
+          <b-button size="sm" @click="row.removeUser" class="mr-2">Remover</b-button>
+        </template>
+
+      </b-table>
     </div>
   </div>
 </template>
@@ -42,6 +47,7 @@ export default {
       },
       items: [
       ],
+      fields: ["id", "tag", "remover_tag"],
       units: [],
       show: true
     };
@@ -86,7 +92,7 @@ export default {
         
         temp.push(
           {
-            id: this.tempTags[i].id,
+            id: this.tempTags[i]._id,
             tag: this.tempTags[i].tag
           }
         );

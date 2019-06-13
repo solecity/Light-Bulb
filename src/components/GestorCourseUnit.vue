@@ -23,6 +23,28 @@
         ></b-form-input>
       </b-form-group>
 
+      
+      <b-form-group id="input-group-3" label="Unidades Pedagógicas:" label-for="input-3">
+        <b-form-select
+          id="input-3"
+          v-model="form.teacher"
+          :options="getTeachers()"
+          required
+        >
+        <option selected value="">Professores</option>
+        </b-form-select>
+      </b-form-group>
+      
+      <b-form-group id="nameLabel" label="Gabinete:" label-for="inputName">
+        <b-form-input
+          id="inputName"
+          v-model="form.room"
+          type="text"
+          required
+          placeholder="Gabinete"
+        ></b-form-input>
+      </b-form-group>
+
       <b-button type="submit" variant="primary">Adicionar</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
@@ -50,7 +72,9 @@ export default {
     return {
       form: {
         name: "",
-        year: 0
+        year: 0,
+        room: "",
+        teacher: ""
       },
       items: [
       ],
@@ -62,6 +86,7 @@ export default {
     this.loggedUser = this.$store.state.loggedUser;
     this.tempCourseUnits = this.$store.state.courseUnits;
     this.tempCourses = this.$store.state.courses;
+    this.tempUsers = this.$store.state.users;
     //this.tempCourseUnit;
     /* for(let i=0; i<this.tempCourses.length; i++){
       this.tempCourseUnit.push(this.tempCourses[i].courseUnit);
@@ -83,6 +108,8 @@ export default {
       // Reset our form values
       this.form.name = "";
       this.form.year = "";
+      this.form.room = "";
+      this.form.teacher = "";
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
@@ -100,18 +127,38 @@ export default {
         
         temp.push(
           {
-            id: this.tempCourseUnits[i].id,
-            name: this.tempCourseUnits[i].unit,
-            year: this.tempCourseUnits[i].year
+            id: this.tempCourseUnits[i]._id,
+            nome: this.tempCourseUnits[i].unit,
+            ano: this.tempCourseUnits[i].year,
+            professor: this.getTeacherNameById(this.tempCourseUnits[i].teacher),
+            gabinete: this.tempCourseUnits[i].description
           }
         );
         console.log("c: " + temp);
       }
       return temp;
     },
+    getTeachers() {
+      let temp = [];
+      console.log(this.tempUsers);
+      console.log(this.tempUsers.length);
+
+      for (let index = 0; index < this.tempUsers.length; index++) {
+        console.log("a: " + index);
+        if(this.tempUsers[index].type == "teacher"){
+          temp.push(this.tempUsers[index].name);
+          console.log("b: " + temp);
+        }
+      }
+      return temp;
+    },
     
   },
-  computed: {}
+  computed: {
+    ...mapGetters([
+      "getTeacherNameById"
+    ])
+  }
 };
 </script>
 

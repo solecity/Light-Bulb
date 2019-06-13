@@ -613,11 +613,12 @@ export default new Vuex.Store({
       // let tempCourseUnits;
       let tempUnits = [];
       let tempUnits2 = [];
+      console.log("id:", id)
       let cont;
       for (let i = 0; i < state.courses.length; i++) {
         //tempCourseUnits = state.courses[i].courseUnit
         if (state.courses[i]._id == id) {
-          tempUnits = state.courses[i].courseUnit;
+          tempUnits = state.courses[i].units;
         }
       }
 
@@ -635,6 +636,45 @@ export default new Vuex.Store({
       }
       console.log("j: " + tempUnits[tempUnits.length - 1])
       return tempUnits2;
+    },
+    getUnitsByCourseId2: state => id => {
+      // let tempCourseUnits;
+      let tempUnits = [];
+      let tempUnits2 = [];
+      console.log("id:", id)
+      let cont;
+      for (let i = 0; i < state.courses.length; i++) {
+        //tempCourseUnits = state.courses[i].courseUnit
+        if (state.courses[i]._id == id) {
+          tempUnits = state.courses[i].units;
+        }
+      }
+
+      // tempUnits.splice(",")
+      console.log(tempUnits[tempUnits.length - 1])
+
+      for (let i = 0; i < state.courseUnits.length; i++) {
+        for (let j = 0; j < tempUnits.length; j++) {
+          console.log("k: " + state.courseUnits[i]._id)
+          if (tempUnits[j] == state.courseUnits[i]._id && tempUnits[j] == state.courseUnits[i]._id) {
+            tempUnits2.push(state.courseUnits[i].unit)
+            console.log("aaa")
+          }
+        }
+      }
+      console.log("j: " + tempUnits[tempUnits.length - 1])
+      return tempUnits2;
+    },
+    getTeacherNameById: state => id => {
+      let temp = ""
+      for (let i = 0; i < state.users.length; i++) {
+        if(id == state.users[i]._id){
+          temp = state.users[i].name
+        }
+      }
+      console.log("temp:",temp)
+      return temp
+      //return state.users.find(id => user._id == id);
     },
     getLevelById: state => id => {
       return state.levels.find(level => level._id == id);

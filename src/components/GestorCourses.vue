@@ -143,9 +143,9 @@ export default {
         
         temp.push(
           {
-            id: this.tempCourses[i].id,
+            id: this.tempCourses[i]._id,
             name: this.tempCourses[i].course,
-            units: this.tempCourses[i].courseUnit + " "
+            units: this.getUnitsByCourseId2(this.tempCourses[i]._id) + " "
           }
         );
         console.log("c: " + temp);
@@ -154,7 +154,11 @@ export default {
     },
     
   },
-  computed: {}
+  computed: {
+    ...mapGetters([
+      "getUnitsByCourseId2"
+    ])
+  }
 };
 </script>
 

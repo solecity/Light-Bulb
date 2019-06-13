@@ -38,7 +38,7 @@
               <b-col sm="3" class="text-sm-right">
                 <b>ID:</b>
               </b-col>
-              <b-col>{{ row.item.id }}</b-col>
+              <b-col>{{ row.item._id }}</b-col>
             </b-row>
 
             <b-row class="mb-2">
@@ -108,7 +108,7 @@ export default {
         console.log("d: " + i);
 
         temp.push({
-          id: this.tempUsers[i].id,
+          id: this.tempUsers[i]._id,
           name: this.tempUsers[i].name,
           type: this.tempUsers[i].type,
           email: this.tempUsers[i].email

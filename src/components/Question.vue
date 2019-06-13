@@ -73,7 +73,7 @@
                     </b-col>
                     <b-col md="8" class="mt-2">
                       <p>{{ questionUser.name }}</p>
-                      <p>Lvl {{ getLevelById(questionUser.gameElements.level).id }} - {{ getLevelById(this.questionUser.gameElements.level).label }}</p>
+                      <p>Lvl - {{ getLevelById(this.questionUser.gameElements.level).level }}</p>
                     </b-col>
                   </b-row>
                 </b-col>
@@ -105,13 +105,13 @@
                 <b-button class="upBtn">
                   <i class="fa fa-angle-up fa-lg"></i>
                 </b-button>
-                <p>{{answer.upvotes}}</p>
+                <p>{{answer.upvotes.length}}</p>
               </b-row>
               <b-row class="voteBtn">
                 <b-button class="downBtn">
                   <i class="fa fa-angle-down fa-lg"></i>
                 </b-button>
-                <p>{{answer.downvotes}}</p>
+                <p>{{answer.downvotes.length}}</p>
               </b-row>
             </b-col>
 
@@ -128,15 +128,15 @@
                     <p>XXXX horas</p>
                   </b-col>
                   </b-row>-->
-                  <!-- <b-row>
+                   <b-row>
                     <b-col md="4" class="mt-3">
                       <img :src="getUserById(answer.user).profilePic" alt="pic.png">
                     </b-col>
                     <b-col md="8" class="mt-2">
                       <p>{{ getUserById(answer.user).name }}</p>
-                      <p>Lvl {{ getLevelById(getUserById(answer.user).gameElements.level)._id }} - {{ getLevelById(getUserById(answer.user).gameElements.level).label }}</p>
+                      <p>Lvl - {{ getLevelById(getUserById(answer.user).gameElements.level).level }}</p>
                     </b-col>
-                  </b-row>-->
+                  </b-row>
                 </b-col>
               </b-row>
             </b-col>
@@ -144,7 +144,7 @@
         </b-col>
       </b-row>
 
-      <div v-if="question.status == 'unlocked'">
+      <div v-if="question.locked == false">
         <!-- NEW ANSWER -->
         <b-row class="subrow rowsInfo">
           <h5>A tua resposta</h5>

@@ -1,12 +1,12 @@
-import axios from "axios";
+/*import axios from "axios";
 
 export default () => {
     return axios.create({
         baseURL: "http://localhost:3000/"
     })
-}
+}*/
 
-async function getUser() {
+/*async function getUser() {
     try {
         const response = await axios.get('/user?ID=12345');
         console.log(response);
@@ -50,3 +50,4 @@ function getQuestions(){
       console.log(res.data);
     });
 }
+*/

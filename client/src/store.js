@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     loggedUser: 0,
     users: [
-      {
+      /*{
         id: 1,
         type: "student",
         name: "Ana Maria Torres",
@@ -46,7 +46,7 @@ export default new Vuex.Store({
           medals: [1, 2],
           reputation: 0
         }
-      },
+      },*/
       /*{
         id: 2,
         type: "teacher",
@@ -353,6 +353,7 @@ export default new Vuex.Store({
         })
         .catch(error => {
           console.log(error)
+          console.log("kkkkk")
         })
     },
     loadCourses({ commit }) {
@@ -365,6 +366,7 @@ export default new Vuex.Store({
         })
         .catch(error => {
           console.log(error)
+          console.log("kkkkk")
         })
     },
     loadQuestions({ commit }) {
@@ -377,6 +379,7 @@ export default new Vuex.Store({
         })
         .catch(error => {
           console.log(error)
+          console.log("kkkkk")
         })
     },
     loadAnswers({ commit }) {
@@ -389,6 +392,7 @@ export default new Vuex.Store({
         })
         .catch(error => {
           console.log(error)
+          console.log("kkkkk")
         })
     },
     loadUnits({ commit }) {
@@ -401,6 +405,7 @@ export default new Vuex.Store({
         })
         .catch(error => {
           console.log(error)
+          console.log("kkkkk")
         })
     },
     loadTags({ commit }) {
@@ -413,6 +418,7 @@ export default new Vuex.Store({
         })
         .catch(error => {
           console.log(error)
+          console.log("kkkkk")
         })
     },
     loadMedals({ commit }) {
@@ -425,6 +431,7 @@ export default new Vuex.Store({
         })
         .catch(error => {
           console.log(error)
+          console.log("kkkkk")
         })
     },
     loadLevels({ commit }) {
@@ -437,6 +444,7 @@ export default new Vuex.Store({
         })
         .catch(error => {
           console.log(error)
+          console.log("kkkkk")
         })
     },
     set_new_user1(){

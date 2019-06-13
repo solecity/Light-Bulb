@@ -250,15 +250,22 @@ export default new Vuex.Store({
       state.loggedUser = payload;
     },
     SET_NEW_USER(state, payload) {
-      state.users.push(payload);
+      //state.users.push(payload);
+      axios
+        .post('https://lightbulbserver1819.herokuapp.com/user', payload)
     },
     SET_QUESTION(state, payload) {
-      state.questions.push(payload);
+      //state.questions.push(payload);
+      axios
+        .post('https://lightbulbserver1819.herokuapp.com/question', payload)
     },
     SET_ANSWER(state, payload) {
       for (let i = 0; i < state.questions.length; i++) {
         if (state.questions[i]._id == payload.questionId) {
-          state.questions[i].answers.push(payload.newAnswer);
+          //state.questions[i].answers.push(payload.newAnswer);
+          axios
+            .post('https://lightbulbserver1819.herokuapp.com/question/answer', payload)
+          
         }
       }
     },
@@ -269,7 +276,9 @@ export default new Vuex.Store({
             unitId: payload.unitId,
             courseId: payload.courseId
           };
-          state.users[i].units.push(temp);
+          //state.users[i].units.push(temp);
+          axios
+            .post('https://lightbulbserver1819.herokuapp.com/user/units', temp)
         }
       }
     },
@@ -447,8 +456,8 @@ export default new Vuex.Store({
           console.log("kkkkk")
         })
     },
-    set_new_user1(){
-
+    set_new_user1(context){
+      
     },
     set_logged_user(context, payload) {
       context.commit("SET_LOGGED_USER", payload);

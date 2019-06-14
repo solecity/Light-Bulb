@@ -251,20 +251,34 @@ export default new Vuex.Store({
     },
     SET_NEW_USER(state, payload) {
       //state.users.push(payload);
-      axios
-        .post('https://lightbulbserver1819.herokuapp.com/user', payload)
+      try {
+        axios
+          .post('https://lightbulbserver1819.herokuapp.com/user', payload)
+        
+      } catch (error) {
+        console.log(error)
+      }
     },
     SET_QUESTION(state, payload) {
       //state.questions.push(payload);
-      axios
-        .post('https://lightbulbserver1819.herokuapp.com/question', payload)
+      try {
+        console.log("try")
+        console.log(payload)
+        axios
+          .post('https://lightbulbserver1819.herokuapp.com/question', payload)
+          //https://cors-anywhere.herokuapp.com/
+        
+      } catch (error) {
+        console.log("oooo")
+        console.log(error)
+      }
     },
     SET_ANSWER(state, payload) {
       for (let i = 0; i < state.questions.length; i++) {
         if (state.questions[i]._id == payload.questionId) {
           //state.questions[i].answers.push(payload.newAnswer);
           axios
-            .post('https://lightbulbserver1819.herokuapp.com/question/answer', payload)
+            .post('https://lightbulbserver1819.herokuapp.com/question/answer', payload.newAnswer)
           
         }
       }
@@ -277,6 +291,7 @@ export default new Vuex.Store({
             courseId: payload.courseId
           };
           //state.users[i].units.push(temp);
+          console.log("yyyy")
           axios
             .post('https://lightbulbserver1819.herokuapp.com/user/units', temp)
         }
@@ -292,8 +307,19 @@ export default new Vuex.Store({
     },
     EDIT_QUESTION_UPVOTE(state, payload) {
       for (let i = 0; i < state.questions.length; i++) {
-        if (state.questions[i].id == payload.question) {
-          state.questions[i].upvote.push(payload.user);
+        if (state.questions[i]._id == payload.question) {
+         // state.questions[i].upvote.push(payload.user);
+          try {
+            console.log("try")
+            console.log(payload)
+            axios
+              .post('https://lightbulbserver1819.herokuapp.com/question/upvotes', payload)
+              //https://cors-anywhere.herokuapp.com/
+            
+          } catch (error) {
+            console.log("oooo")
+            console.log(error)
+          }
         }
       }
     },

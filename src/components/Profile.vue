@@ -15,12 +15,12 @@
         </b-col>
         <b-col md="6" id="profileInfo" class="profileText">
           <h4>{{ activeUser.name }}</h4>
-          <p>Level {{ activeUser.gameElements.level }} - {{ userLevel.label }}</p>
+          <p>Level - {{ userLevel.level }}</p>
 
           <!-- XP -->
           <p class="w-25 barXP">XP: {{ activeUser.gameElements.xp }}</p>
           <b-progress :value="activeUser.gameElements.xp" :max="userLevel.maxXP" class="w-50"></b-progress>
-          <p class="w-25 barXP">{{ activeUser.gameElements.levelXP }} / {{ userLevel.maxXP }}</p>
+          <p class="w-25 barXP">{{ activeUser.gameElements.xp }} / {{ userLevel.maxXP }}</p>
         </b-col>
 
         <!-- STATS -->
@@ -28,7 +28,7 @@
           <b-row>
             <b-col md="6">
               <p>
-                {{ getQuestionsByUserId(activeUser.id).length }}
+                {{ getQuestionsByUserId(activeUser._id).length }}
                 <br>Perguntas
               </p>
             </b-col>
@@ -67,19 +67,19 @@
           <!-- DIVISION BAR -->
           <b-row id="divisionBarQuestion" class="bar"></b-row>
 
-          <b-col md="12" v-for="question in tempQuestions" :key="question.id" class="history">
-            <router-link :to="{ name: 'question', params: { id: question.id } }">
+          <b-col md="12" v-for="question in questions" :key="question._id" class="history">
+            <router-link :to="{ name: 'question', params: { id: question._id } }">
               <b-row>
                 <b-col md="7" class="text-left historyQuestions">
                   <p>{{ question.title }}</p>
                 </b-col>
                 <b-col md="1" class="text-left historyQuestions">
                   <i class="fa fa-long-arrow-alt-up"></i>
-                  <p>&nbsp;{{ question.upvote }}</p>
+                  <p>&nbsp;{{ question.upvotes.length }}</p>
                 </b-col>
                 <b-col md="1" class="text-left historyQuestions">
                   <i class="fa fa-long-arrow-alt-down"></i>
-                  <p>&nbsp;{{ question.downvote }}</p>
+                  <p>&nbsp;{{ question.downvotes.length }}</p>
                 </b-col>
                 <b-col md="1" class="text-left historyQuestions">
                   <i class="fa fa-eye"></i>
@@ -98,8 +98,8 @@
           <b-row id="divisionBarQuestion" class="bar"></b-row>
 
           <b-row class="subrow">
-            <b-col md="4" v-for="medal in userMedals" :key="medal.id" class="medal">
-              <p>{{ medal.label }}</p>
+            <b-col md="4" v-for="medal in userMedals" :key="medal._id" class="medal">
+              <p>{{ medal.medal }}</p>
             </b-col>
           </b-row>
         </b-col>
@@ -111,6 +111,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "profile",
@@ -127,6 +128,19 @@ export default {
       tempLoggedId: 0
     };
   },
+  watch: {
+    // whenever question changes, this function will run
+    users: function(newUser, oldUser) {
+      console.log("newUser");
+      console.log(newUser);
+      if (newUser.length > 0) {
+        this.activeUser = this.getUserById("5cf1984a75f94e0004c5b8f2");
+        this.userLevel = this.getLevelById(this.activeUser.gameElements.level);
+        this.tempQuestions = this.getQuestionsByUserId("5cf1984a75f94e0004c5b8f2");
+        this.showUserMedals();
+      }
+    }
+  },
   created() {
     this.loggedUser = this.$store.state.loggedUser;
 
@@ -134,18 +148,22 @@ export default {
     this.tempLoggedId = parseInt(
       JSON.parse(localStorage.getItem("loggedUser"))
     );
-
-    this.activeUser = this.getUserById(this.tempLoggedId);
-    this.userLevel = this.getLevelById(this.activeUser.gameElements.level);
-    this.tempQuestions = this.getQuestionsByUserId(this.tempLoggedId);
-    this.showUserMedals();
+  },
+  mounted() {
+    this.$store.dispatch("loadUsers");
+    this.$store.dispatch("loadCourses");
+    this.$store.dispatch("loadQuestions");
+    this.$store.dispatch("loadUnits");
+    this.$store.dispatch("loadMedals");
+    this.$store.dispatch("loadLevels");
+    this.$store.dispatch("loadTags");
   },
   methods: {
     countUpvotes() {
       let count = 0;
       if (this.tempQuestions.length != 0) {
         for (let i = 0; i < this.tempQuestions.length; i++) {
-          count += this.tempQuestions[i].upvote;
+          count += this.tempQuestions[i].upvotes;
         }
       }
       return count;
@@ -168,7 +186,7 @@ export default {
       for (let i = 0; i < medals.length; i++) {
         let temp = {
           id: medals[i],
-          label: this.getMedalById(medals[i]).label,
+          label: this.getMedalById(medals[i]).medal,
           type: this.getMedalById(medals[i]).type
         };
         this.userMedals.push(temp);
@@ -179,7 +197,7 @@ export default {
       for (let i = 0; i < this.tempMedals.length; i++) {
         let temp = {
           id: this.tempMedals[i],
-          label: this.getMedalById(this.tempMedals[i]).label,
+          label: this.getMedalById(this.tempMedals[i]).medal,
           type: this.getMedalById(this.tempMedals[i]).type
         };
         this.userMedals.push(temp);
@@ -196,6 +214,15 @@ export default {
       "getAnswersByUserId",
       "getMedalById",
       "getLevelById"
+    ]),
+    ...mapState([
+      "users",
+      "courses",
+      "questions",
+      "courseUnits",
+      "medals",
+      "levels",
+      "tags"
     ])
   }
 };

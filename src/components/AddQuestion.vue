@@ -21,6 +21,37 @@
             ></b-form-textarea>
           </b-form-group>
 
+          <div>
+            <b-form-group id="input-group-4" label="Tags:" label-for="input-tags">
+              <b-form-select 
+                id="input-tags"
+                v-model="form.tag"
+                :options="getTags()"
+                multiple="true"
+              ></b-form-select>
+            </b-form-group>
+          </div>
+
+          <div>
+            <b-form-group id="input-group-4" label="Tags:" label-for="input-course">
+              <b-form-select 
+                id="input-course"
+                v-model="form.course"
+                :options="getCourses()"
+              ></b-form-select>
+            </b-form-group>
+          </div>
+
+          <div>
+            <b-form-group id="input-group-4" label="Tags:" label-for="input-units">
+              <b-form-select 
+                id="input-units"
+                v-model="form.unit"
+                :options="getUnits()"
+              ></b-form-select>
+            </b-form-group>
+          </div>
+
           <div id="img" class="form-group">
             <label for="inputPhoto">Imagens (Opcional)</label>
             <input type="url" class="form-control" id="inputPhoto" placeholder="Imagem">
@@ -86,7 +117,10 @@ export default {
         idTags: [],
         idCourse: 0,
         files: "",
-        images: ""
+        images: "",
+        tag: [],
+        course: "",
+        unit: ""
       },
       tempQuestions: [],
       todaysDate: "",
@@ -95,9 +129,22 @@ export default {
       tempLoggedId: 0
     };
   },
+  watch: {
+    // whenever question changes, this function will run
+    questions: function(newQuestion, oldQuestion) {
+      console.log("newQuestion");
+      console.log(newQuestion);
+      if (newQuestion.length > 0) {
+        
+      }
+    }
+  },
   created() {
     this.loggedUser = this.$store.state.loggedUser;
     this.todaysDate = this.$store.getters.getTodaysDate;
+    this.tempTags = this.$store.state.tags;
+    this.tempCourses = this.$store.state.courses;
+    this.tempCourseUnits = this.$store.state.courseUnits;
 
     /********/
     this.tempLoggedId = parseInt(
@@ -105,14 +152,50 @@ export default {
     );
   },  
   mounted(){    
-    this.$store.dispatch("loadUsers");
+    /*this.$store.dispatch("loadUsers");
     this.$store.dispatch("loadCourses");
     this.$store.dispatch("loadQuestions");
     this.$store.dispatch("loadAnswers");
     this.$store.dispatch("loadUnits");
-    this.$store.dispatch("loadTags");
+    this.$store.dispatch("loadTags");*/
   },
   methods: {
+    getTags() {
+      let temp = [];
+      console.log("ggggg:",this.tempTags);
+      console.log(this.tempTags.length);
+
+      for (let index = 0; index < this.tempTags.length; index++) {
+        console.log("a: " + index);
+        temp.push(this.tempTags[index].tag);
+        console.log("b: " + temp);
+      }
+      return temp;
+    },
+    getCourses() {
+      let temp = [];
+      console.log(this.tempCourses);
+      console.log(this.tempCourses.length);
+
+      for (let index = 0; index < this.tempCourses.length; index++) {
+        console.log("a: " + index);
+        temp.push(this.tempCourses[index].course);
+        console.log("b: " + temp);
+      }
+      return temp;
+    },
+    getUnits() {
+      let temp = [];
+      console.log(this.tempCourseUnits);
+      console.log(this.tempCourseUnits.length);
+
+      for (let index = 0; index < this.tempCourseUnits.length; index++) {
+        console.log("a: " + index);
+        temp.push(this.tempCourseUnits[index].unit);
+        console.log("b: " + temp);
+      }
+      return temp;
+    },
     checkQuestion(fields) {
       let error = "";
 
@@ -142,7 +225,29 @@ export default {
     },
 
     addQuestion() {
+      let tagsId = document.getElementById("input-tags").value
+      console.log("tt:",tagsId)
+
       let newQuestion = {
+        tags: [tagsId],
+        images: [],
+        //date: this.$store.getters.getTodaysDate,
+        //view: 0,
+        //upvotes: [],
+        //downvotes: [],
+        //locked: false,
+        //followers: [],
+        //_id: this.$store.getters.getQuestionLastId,
+        title: this.form.title,
+        description: this.form.description,
+        user: this.tempLoggedId,
+        course: "",
+        unit: "",
+        //answers: [],
+        //__v: 0
+      }
+
+      let newQuestion2 = {
         id: this.$store.getters.getQuestionLastId,
         title: this.form.title,
         description: this.form.description,
@@ -163,7 +268,7 @@ export default {
         this.addXP();
         this.checkMedals();
         this.$store.dispatch("set_question", newQuestion);
-        alert("Registo efetuado com sucesso");
+        //alert("Registo efetuado com sucesso");
       } else {
         alert(this.questionValidation().msg);
       }

@@ -325,8 +325,19 @@ export default new Vuex.Store({
     },
     EDIT_QUESTION_DOWNVOTE(state, payload) {
       for (let i = 0; i < state.questions.length; i++) {
-        if (state.questions[i].id == payload.question) {
-          state.questions[i].downvote.push(payload.user);
+        if (state.questions[i]._id == payload.question) {
+          //state.questions[i].downvote.push(payload.user);
+          try {
+            console.log("try")
+            console.log(payload)
+            axios
+              .post('https://lightbulbserver1819.herokuapp.com/question/downvotes', payload)
+              //https://cors-anywhere.herokuapp.com/
+            
+          } catch (error) {
+            console.log("oooo")
+            console.log(error)
+          }
         }
       }
     },

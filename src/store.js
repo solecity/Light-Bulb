@@ -262,10 +262,10 @@ export default new Vuex.Store({
     SET_QUESTION(state, payload) {
       //state.questions.push(payload);
       try {
-        console.log("try")
-        console.log(payload)
+        //console.log()
+        console.log("try", payload)
         axios
-          .post('https://lightbulbserver1819.herokuapp.com/question', payload)
+          .post('http://lightbulbserver1819.herokuapp.com/question', payload)
           //https://cors-anywhere.herokuapp.com/
         
       } catch (error) {

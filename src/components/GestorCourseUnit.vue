@@ -24,7 +24,7 @@
       </b-form-group>
 
       
-      <b-form-group id="input-group-3" label="Unidades Pedagógicas:" label-for="input-3">
+      <b-form-group id="input-group-3" label="Professores:" label-for="input-3">
         <b-form-select
           id="input-3"
           v-model="form.teacher"
@@ -45,7 +45,7 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Adicionar</b-button>
+      <b-button type="submit" @click="addUnit()" variant="primary">Adicionar</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
     <br>
@@ -152,6 +152,47 @@ export default {
       }
       return temp;
     },
+    addUnit(){
+      let teacherId = document.getElementById("input-3").value
+      console.log("tt:",tagsId)
+
+      let newUnit = {
+        teacher: teachersId,
+        description: this.form.room,
+        unit: this.form.name,
+        year: this.form.year
+      }
+
+      if (this.unitValidation().valid) {
+        this.$store.dispatch("set_unit", newUnit);
+        //alert("Registo efetuado com sucesso");
+      } else {
+        alert(this.unitValidation().msg);
+      }
+    },
+    unitValidation() {
+      let fields = {
+        unit: this.form.name,
+        teacher: this.form.form.teacher,
+        description: this.form.room,
+        year: this.form.year
+      };
+      let valid = false;
+
+      if (this.checkUnit(fields) == "") {
+        valid = true;
+      } else {
+        valid = false;
+      }
+    },
+    checkUnit(fields) {
+      let error = "";
+
+      if (fields.name == "" || fields.room == "" || fields.teacher == "" || fields.year == 0) {
+        error = "Os dados estão incompletos";
+      }
+      return error;
+    }
     
   },
   computed: {

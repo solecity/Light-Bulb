@@ -21,7 +21,7 @@
         ></b-form-select>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Adicionar</b-button>
+      <b-button type="submit" @click="addCourse()" iant="primary">Adicionar</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
     <br>
@@ -152,7 +152,45 @@ export default {
       }
       return temp;
     },
-    
+    addCourse(){
+      let unitsId = document.getElementById("input-4").value
+      console.log("tt:",tagsId)
+
+      let newCourse = {
+        units: [unitsId],
+        course: this.form.name,
+        coordinator: "",
+        level: ""
+      }
+
+      if (this.courseValidation().valid) {
+        this.$store.dispatch("set_course", newCourse);
+        //alert("Registo efetuado com sucesso");
+      } else {
+        alert(this.courseValidation().msg);
+      }
+    },
+    courseValidation() {
+      let fields = {
+        name: this.form.name,
+        unit: this.form.unit
+      };
+      let valid = false;
+
+      if (this.checkCourse(fields) == "") {
+        valid = true;
+      } else {
+        valid = false;
+      }
+    },
+    checkCourse(fields) {
+      let error = "";
+
+      if (fields.name == "" || fields.unit == "") {
+        error = "Os dados estão incompletos";
+      }
+      return error;
+    }
   },
   computed: {
     ...mapGetters([

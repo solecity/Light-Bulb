@@ -273,6 +273,20 @@ export default new Vuex.Store({
         console.log(error)
       }
     },
+    SET_COURSE(state, payload) {
+      //state.questions.push(payload);
+      try {
+        //console.log()
+        console.log("try2", payload)
+        axios
+          .post('http://lightbulbserver1819.herokuapp.com/course', payload)
+          //https://cors-anywhere.herokuapp.com/
+        
+      } catch (error) {
+        console.log("oooo2")
+        console.log(error)
+      }
+    },
     SET_ANSWER(state, payload) {
       for (let i = 0; i < state.questions.length; i++) {
         if (state.questions[i]._id == payload.questionId) {
@@ -504,6 +518,9 @@ export default new Vuex.Store({
     },
     set_question(context, payload) {
       context.commit("SET_QUESTION", payload);
+    },
+    set_course(context, payload) {
+      context.commit("SET_COURSE", payload);
     },
     set_answer(context, payload) {
       context.commit("SET_ANSWER", payload);

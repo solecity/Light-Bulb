@@ -12,7 +12,7 @@
       </b-form-group>
 
 
-      <b-button type="submit" variant="primary">Adicionar</b-button>
+      <b-button type="submit" @click="addTag()" variant="primary">Adicionar</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
     <br>
@@ -100,6 +100,38 @@ export default {
       }
       return temp;
     },
+    addTag(){
+      let newUnit = {
+        tag: this.form.tag
+      }
+
+      if (this.tagValidation().valid) {
+        this.$store.dispatch("set_tag", newUnit);
+        //alert("Registo efetuado com sucesso");
+      } else {
+        alert(this.tagValidation().msg);
+      }
+    },
+    tagValidation() {
+      let fields = {
+        tag: this.form.tag
+      };
+      let valid = false;
+
+      if (this.checkTag(fields) == "") {
+        valid = true;
+      } else {
+        valid = false;
+      }
+    },
+    checkTag(fields) {
+      let error = "";
+
+      if (fields.tag == "") {
+        error = "Os dados estão incompletos";
+      }
+      return error;
+    }
     
   },
   computed: {}

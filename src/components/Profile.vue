@@ -99,7 +99,7 @@
 
           <b-row class="subrow">
             <b-col md="4" v-for="medal in userMedals" :key="medal._id" class="medal">
-              <p>{{ medal.medal }}</p>
+              <p>{{ medal.label }}</p>
             </b-col>
           </b-row>
         </b-col>
@@ -189,6 +189,7 @@ export default {
           label: this.getMedalById(medals[i]).medal,
           type: this.getMedalById(medals[i]).type
         };
+        console.log("temp",temp)
         this.userMedals.push(temp);
       }
     },

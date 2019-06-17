@@ -30,8 +30,8 @@
 
         <b-nav-item-dropdown id="profileNavbar" right>
           <template slot="button-content">
-            <img :src="activeUser.profilePic" id="profilePic" alt="logo.png" height="40">
-            <span>&nbsp;{{ activeUser.name }}</span>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4HsP8RYZ6xkXYwHOFmkLV1cRx-DjWnphDX_TOrJ4xGnMP9sLl" id="profilePic" alt="logo.png" height="40">
+            <span>&nbsp;João Sousa Gerês</span>
           </template>
           <b-dropdown-item href="#" @click="userProfile()">Perfil</b-dropdown-item>
           <b-dropdown-item href="#" @click="ControlPanel()">Painel de controlo</b-dropdown-item>
@@ -65,7 +65,7 @@ export default {
       JSON.parse(localStorage.getItem("loggedUser"))
     );
 
-    this.activeUser = this.getUserById(this.tempLoggedId);
+    this.activeUser = this.getUserById("5cf1984a75f94e0004c5b8f2");
   },
   methods: {
     userProfile() {

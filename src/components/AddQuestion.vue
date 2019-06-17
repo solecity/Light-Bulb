@@ -39,6 +39,7 @@
                 v-model="form.course"
                 :options="getCourses()"
               ></b-form-select>
+        <option selected value="">Curso</option>
             </b-form-group>
           </div>
 
@@ -49,6 +50,7 @@
                 v-model="form.unit"
                 :options="getUnits()"
               ></b-form-select>
+        <option selected value="">Unidade Curricular</option>
             </b-form-group>
           </div>
 

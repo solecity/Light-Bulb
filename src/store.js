@@ -315,6 +315,20 @@ export default new Vuex.Store({
         console.log(error)
       }
     },
+    SET_USER(state, payload) {
+      //state.questions.push(payload);
+      try {
+        //console.log()
+        console.log("try5", payload)
+        axios
+          .post('http://lightbulbserver1819.herokuapp.com/user', payload)
+          //https://cors-anywhere.herokuapp.com/
+        
+      } catch (error) {
+        console.log("oooo5")
+        console.log(error)
+      }
+    },
     SET_ANSWER(state, payload) {
       for (let i = 0; i < state.questions.length; i++) {
         if (state.questions[i]._id == payload.questionId) {
@@ -555,6 +569,9 @@ export default new Vuex.Store({
     },
     set_tag(context, payload) {
       context.commit("SET_TAG", payload);
+    },
+    set_user(context, payload) {
+      context.commit("SET_USER", payload);
     },
     set_answer(context, payload) {
       context.commit("SET_ANSWER", payload);

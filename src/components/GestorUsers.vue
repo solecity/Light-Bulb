@@ -18,7 +18,7 @@
         <b-form-input id="inputEmail" v-model="form.email" type="text" required placeholder="E-mail"></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Adicionar</b-button>
+      <b-button type="submit" @click="addUser()" variant="primary">Adicionar</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
     <br>
@@ -122,6 +122,45 @@ export default {
       let temp;
       temp = ["Student", "Teacher"]
       return temp;
+    },
+    addUser(){
+      let teacherId = document.getElementById("input-3").value
+      console.log("tt:",tagsId)
+
+      let newUnit = {
+        type: this.form.type,
+        name: this.form.name,
+        email: this.form.email
+      }
+
+      if (this.userValidation().valid) {
+        this.$store.dispatch("set_user", newUnit);
+        //alert("Registo efetuado com sucesso");
+      } else {
+        alert(this.userValidation().msg);
+      }
+    },
+    userValidation() {
+      let fields = {
+        type: this.form.type,
+        name: this.form.name,
+        email: this.form.email
+      };
+      let valid = false;
+
+      if (this.checkUnit(fields) == "") {
+        valid = true;
+      } else {
+        valid = false;
+      }
+    },
+    checkUnit(fields) {
+      let error = "";
+
+      if (fields.name == "" || fields.type == "" || fields.email == "") {
+        error = "Os dados estão incompletos";
+      }
+      return error;
     }
   },
   computed: {}

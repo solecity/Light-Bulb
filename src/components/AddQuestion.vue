@@ -23,6 +23,7 @@
 
           <div>
             <b-form-group id="input-group-4" label="Tags:" label-for="input-tags">
+              <option selected value="">Tags</option>
               <b-form-select 
                 id="input-tags"
                 v-model="form.tag"
@@ -38,8 +39,9 @@
                 id="input-course"
                 v-model="form.course"
                 :options="getCourses()"
-              ></b-form-select>
-        <option selected value="">Curso</option>
+              >
+              <option selected value="">Curso</option>
+              </b-form-select>
             </b-form-group>
           </div>
 
@@ -49,8 +51,9 @@
                 id="input-units"
                 v-model="form.unit"
                 :options="getUnits()"
-              ></b-form-select>
-        <option selected value="">Unidade Curricular</option>
+              >
+              <option selected value="">Unidade Curricular</option>
+              </b-form-select>
             </b-form-group>
           </div>
 

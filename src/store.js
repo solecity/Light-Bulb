@@ -400,14 +400,26 @@ export default new Vuex.Store({
     EDIT_QUESTION_STATUS(state, payload) {
       for (let i = 0; i < state.questions.length; i++) {
         if (state.questions[i].id == payload) {
-          state.questions[i].status = "locked";
+          state.questions[i].locked = true;
         }
       }
     },
     EDIT_QUESTION_FOLLOWER(state, payload) {
       for (let i = 0; i < state.questions.length; i++) {
         if (state.questions[i]._id == payload.question) {
-          state.questions[i].followers.push(payload.user);
+          //state.questions[i].followers.push(payload.user);
+          try {
+            console.log("try")
+            console.log(payload)
+            axios
+              .post('https://lightbulbserver1819.herokuapp.com/question/followers', payload)
+              //https://cors-anywhere.herokuapp.com/
+            
+          } catch (error) {
+            console.log("oooo")
+            console.log(error)
+          }
+
         }
       }
     },
@@ -415,7 +427,18 @@ export default new Vuex.Store({
       for (let i = 0; i < state.users.length; i++) {
         if (state.users[i].id == payload.userId) {
           alert("ASD");
-          state.users[i].gameElements.medals.push(payload.medal);
+          //state.users[i].gameElements.medals.push(payload.medal);
+          try {
+            console.log("try")
+            console.log(payload)
+            axios
+              .post('https://lightbulbserver1819.herokuapp.com/user/gameElements/medals', payload)
+              //https://cors-anywhere.herokuapp.com/
+            
+          } catch (error) {
+            console.log("oooo")
+            console.log(error)
+          }
         }
       }
     },
